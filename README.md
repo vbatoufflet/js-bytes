@@ -18,6 +18,12 @@ Note
 ⚠️ IMPORTANT: this library is at an early stage, thus breaking changes might
 still occur as its development evolves.
 
+Resources
+---------
+
+* [Documentation](https://js-bytes.batou.dev/)
+* [Changelog](https://github.com/vbatoufflet/js-bytes/blob/master/CHANGELOG.md)
+
 License
 -------
 
