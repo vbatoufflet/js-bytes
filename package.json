@@ -3,6 +3,17 @@
     "version": "0.1.0",
     "author": "Vincent Batoufflet <vincent@batou.dev>",
     "license": "MIT",
+    "keywords": [
+        "binary",
+        "bytes",
+        "decimal",
+        "format",
+        "iec",
+        "intl",
+        "parse",
+        "si"
+    ],
+    "repository": "https://github.com/vbatoufflet/js-bytes",
     "main": "dist/bytes.js",
     "module": "dist/bytes.es.js",
     "types": "types/index.d.ts",
