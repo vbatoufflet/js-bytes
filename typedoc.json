@@ -1,5 +1,8 @@
 {
     "excludePrivate": true,
     "excludeProtected": true,
+    "hideGenerator": true,
+    "highlightTheme": "monokai",
+    "includeVersion": true,
     "theme": "node_modules/typedoc-default-themes-dark/bin/minimal"
 }

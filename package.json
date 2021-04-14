@@ -26,7 +26,7 @@
     ],
     "scripts": {
         "build": "rollup --config rollup.config.js",
-        "doc": "typedoc types/index.d.ts",
+        "docs": "typedoc types/index.d.ts",
         "lint": "eslint .",
         "test": "ts-mocha tests/*.test.ts"
     },
