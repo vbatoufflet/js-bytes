@@ -1,3 +1,55 @@
+export class Bytes {
+    /**
+     * Create a new Bytes object from a bytes value.
+     * @param value - bytes value
+     */
+    public static fromBytes(value: number): Bytes;
+
+    /**
+     * Create a new Bytes object from an input string.
+     * @param text - text to parse
+     * @param opts - parsing options
+     */
+    public static fromString(text: string, opts?: ParseOpts): Bytes;
+
+    /**
+     * Return whether or not the Bytes object is valid.
+     */
+    public isValid(): boolean;
+
+    /**
+     * Return whether or not the given object is a valid Bytes one.
+     * @param obj - object to check
+     */
+    public static isBytes(obj: AnyObject): boolean;
+
+    /**
+     * Returns a string representation of the Bytes object using binary (i.e. IEC) units.
+     * @param opts - formatting options
+     */
+    public toBinary(opts: FormatOpts): string;
+
+    /**
+     * Returns the current bytes value.
+     */
+    public toBytes(): number;
+
+    /**
+     * Returns a string representation of the Bytes object using decimal (i.e. SI) units.
+     * @param opts - formatting options
+     */
+    public toDecimal(opts: FormatOpts): string;
+
+    /**
+     * Returns a string representation of the Bytes object according to provided formatting options.
+     * @param opts - formatting options
+     */
+    public toString(opts: FormatOpts): string;
+}
+
+/** Any object */
+type AnyObject = Record<string, unknown>;
+
 /** Formatting options */
 export declare interface FormatOpts {
     /**

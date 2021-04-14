@@ -26,7 +26,7 @@
     ],
     "scripts": {
         "build": "rollup --config rollup.config.js",
-        "doc": "typedoc src/index.ts types/index.d.ts",
+        "doc": "typedoc types/index.d.ts",
         "lint": "eslint .",
         "test": "ts-mocha tests/*.test.ts"
     },
@@ -47,7 +47,6 @@
         "ts-mocha": "^8.0.0",
         "typedoc": "^0.20.35",
         "typedoc-default-themes-dark": "^0.12.10",
-        "typedoc-plugin-merge-modules": "^2.0.0",
         "typescript": "^4.2.4"
     }
 }
