@@ -28,6 +28,7 @@
         "build": "rollup --config rollup.config.js",
         "docs": "typedoc types/index.d.ts",
         "lint": "eslint .",
+        "release": "npm run --production build && npm publish",
         "test": "ts-mocha tests/*.test.ts"
     },
     "devDependencies": {
