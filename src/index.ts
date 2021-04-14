@@ -1,8 +1,6 @@
-import {FormatOpts, ParseOpts} from "../types";
+import {AnyObject, FormatOpts, ParseOpts} from "../types";
 import {format} from "./format";
 import {parse} from "./parse";
-
-type AnyObject = Record<string, unknown>;
 
 export class Bytes {
     protected bytesObject: boolean;
