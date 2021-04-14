@@ -1,4 +1,4 @@
-export class Bytes {
+export declare class Bytes {
     /**
      * Create a new Bytes object from a bytes value.
      * @param value - bytes value
@@ -48,7 +48,7 @@ export class Bytes {
 }
 
 /** Any object */
-type AnyObject = Record<string, unknown>;
+export declare type AnyObject = Record<string, unknown>;
 
 /** Formatting options */
 export declare interface FormatOpts {
