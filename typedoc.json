@@ -1,0 +1,5 @@
+{
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "theme": "node_modules/typedoc-default-themes-dark/bin/minimal"
+}

@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "lib": [
+            "esnext"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "strict": true,
+        "target": "esnext",
+        "types": [
+            "chai",
+            "mocha",
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/**/*.ts",
+        "types/**/*.d.ts"
+    ]
+}
