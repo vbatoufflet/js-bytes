@@ -255,7 +255,25 @@ const testData: {
         },
     },
     {
-        input: "1 Z",
+        input: "1 G",
+        expected: {
+            binary: ["Invalid Bytes"],
+            bytes: NaN,
+            decimal: ["Invalid Bytes"],
+            valid: false,
+        },
+    },
+    {
+        input: "1,0 GiB",
+        expected: {
+            binary: ["Invalid Bytes"],
+            bytes: NaN,
+            decimal: ["Invalid Bytes"],
+            valid: false,
+        },
+    },
+    {
+        input: "1-0 GiB",
         expected: {
             binary: ["Invalid Bytes"],
             bytes: NaN,
