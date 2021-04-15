@@ -13,3 +13,5 @@ export enum DecimalUnit {
     TERA = "T",
     PETA = "P",
 }
+
+export const byteSuffix = "B";

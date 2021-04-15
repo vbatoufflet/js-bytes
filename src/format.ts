@@ -1,5 +1,5 @@
 import {FormatOpts} from "../types";
-import {BinaryUnit, DecimalUnit} from "./units";
+import {BinaryUnit, DecimalUnit} from "./unit";
 
 interface UnitRef<T = BinaryUnit | DecimalUnit> {
     text: T;
@@ -42,11 +42,11 @@ export function format(value: number | null, opts: FormatOpts): string {
         // Always use decimal units to choose the one that will format the value, thus preferring
         // "0.98 KiB" over "1000 B".
         if (Math.abs(value / decimalUnits[idx].value) >= 1) {
-            return `${formatNumber(value / units[idx].value, opts)} ${units[idx].text}B`;
+            return `${formatNumber(value / units[idx].value, opts)}\xa0${units[idx].text}B`;
         }
     }
 
-    return `${formatNumber(value, opts)} B`;
+    return `${formatNumber(value, opts)}\xa0B`;
 }
 
 function formatNumber(value: number, opts: FormatOpts): string {

@@ -1,5 +1,6 @@
 import {ParseOpts} from "../types";
-import {DecimalUnit} from "./units";
+import {isDigit, isSpace} from "./string";
+import {DecimalUnit} from "./unit";
 
 const unitPrefixes = Object.values(DecimalUnit).join("").toUpperCase();
 
@@ -44,7 +45,9 @@ export class Parser {
             return null;
         }
 
-        this.text = this.text.trimLeft();
+        if (isSpace(this.text.charAt(0))) {
+            this.text = this.text.slice(1);
+        }
 
         const c = this.text.charAt(0);
         const idx = c === "k" ? 0 : unitPrefixes.indexOf(c);
@@ -83,7 +86,7 @@ export class Parser {
                 s += "-";
             } else if (this.numerals?.has(c)) {
                 s += this.numerals.get(c);
-            } else if (this.numerals === null && isNumeric(c)) {
+            } else if (this.numerals === null && isDigit(c)) {
                 s += c;
             } else if (c === this.decimal) {
                 if (decimal) {
@@ -92,7 +95,7 @@ export class Parser {
 
                 decimal = true;
                 s += ".";
-            } else if (c === this.group) {
+            } else if (c === this.group || (isSpace(c) && isSpace(this.group))) {
                 continue;
             } else {
                 this.text = c + this.text;
@@ -104,10 +107,6 @@ export class Parser {
 
         return !isNaN(v) ? v : null;
     }
-}
-
-function isNumeric(c: string): boolean {
-    return c >= "0" && c <= "9";
 }
 
 export function parse(text: string, opts?: ParseOpts): number | null {
