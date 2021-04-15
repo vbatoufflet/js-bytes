@@ -1,6 +1,7 @@
 import {ParseOpts} from "../types";
+import {DecimalUnit} from "./units";
 
-const unitPrefixes = "KMGTP";
+const unitPrefixes = Object.values(DecimalUnit).join("").toUpperCase();
 
 export class Parser {
     private decimal = ".";

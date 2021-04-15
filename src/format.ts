@@ -1,24 +1,25 @@
 import {FormatOpts} from "../types";
+import {BinaryUnit, DecimalUnit} from "./units";
 
-interface Unit {
-    text: string;
+interface UnitRef<T = BinaryUnit | DecimalUnit> {
+    text: T;
     value: number;
 }
 
-const binaryUnits: Unit[] = [
-    {text: "Pi", value: Math.pow(1024, 5)},
-    {text: "Ti", value: Math.pow(1024, 4)},
-    {text: "Gi", value: Math.pow(1024, 3)},
-    {text: "Mi", value: Math.pow(1024, 2)},
-    {text: "Ki", value: 1024},
+export const binaryUnits: UnitRef<BinaryUnit>[] = [
+    {text: BinaryUnit.PEBI, value: Math.pow(1024, 5)},
+    {text: BinaryUnit.TEBI, value: Math.pow(1024, 4)},
+    {text: BinaryUnit.GIBI, value: Math.pow(1024, 3)},
+    {text: BinaryUnit.MEBI, value: Math.pow(1024, 2)},
+    {text: BinaryUnit.KIBI, value: 1024},
 ];
 
-const decimalUnits: Unit[] = [
-    {text: "P", value: 1e15},
-    {text: "T", value: 1e12},
-    {text: "G", value: 1e9},
-    {text: "M", value: 1e6},
-    {text: "k", value: 1e3},
+export const decimalUnits: UnitRef<DecimalUnit>[] = [
+    {text: DecimalUnit.PETA, value: 1e15},
+    {text: DecimalUnit.TERA, value: 1e12},
+    {text: DecimalUnit.GIGA, value: 1e9},
+    {text: DecimalUnit.MEGA, value: 1e6},
+    {text: DecimalUnit.KILO, value: 1e3},
 ];
 
 const formatDefaults: FormatOpts = {
