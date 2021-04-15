@@ -25,6 +25,7 @@ export const decimalUnits: UnitRef<DecimalUnit>[] = [
 const formatDefaults: FormatOpts = {
     base: 2,
     digits: 2,
+    space: true,
 };
 
 export function format(value: number | null, opts: FormatOpts): string {
@@ -42,18 +43,27 @@ export function format(value: number | null, opts: FormatOpts): string {
         // Always use decimal units to choose the one that will format the value, thus preferring
         // "0.98 KiB" over "1000 B".
         if (Math.abs(value / decimalUnits[idx].value) >= 1) {
-            return `${formatNumber(value / units[idx].value, opts)}\xa0${units[idx].text}B`;
+            return formatValue(value / units[idx].value, units[idx].text, opts);
         }
     }
 
-    return `${formatNumber(value, opts)}\xa0B`;
+    return formatValue(value, null, opts);
 }
 
-function formatNumber(value: number, opts: FormatOpts): string {
+function formatValue(value: number, unit: string | null, opts: FormatOpts): string {
     const factor = opts.digits && opts.digits > 0 ? Math.pow(10, opts.digits) : 1;
     const v = Math.round(value * factor) / factor;
 
-    return opts.locale
+    let s = opts.locale
         ? v.toLocaleString(opts.locale !== true ? opts.locale : undefined)
         : v.toString();
+
+    if (opts.space) {
+        s += "\xa0";
+    }
+    if (unit !== null) {
+        s += unit;
+    }
+
+    return `${s}B`;
 }

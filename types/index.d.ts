@@ -66,6 +66,11 @@ export declare interface FormatOpts {
      * if set to `true`, and support is disabled when omitted.
      */
     locale?: string | true;
+
+    /**
+     * Add a space between the value and its unit, with default to `true`.
+     */
+    space?: boolean;
 }
 
 /** Parsing options */

@@ -2,6 +2,7 @@ import {assert} from "chai";
 import {it} from "mocha";
 
 import {Bytes} from "../src";
+import {FormatOpts, ParseOpts} from "../types";
 
 const testData: {
     input: string;
@@ -11,7 +12,8 @@ const testData: {
         decimal: string[];
         valid: boolean;
     };
-    locale?: string;
+    format?: FormatOpts;
+    parse?: ParseOpts;
 }[] = [
     {
         input: "0 B",
@@ -212,6 +214,29 @@ const testData: {
         },
     },
 
+    // Without space:
+    {
+        input: "1.12kB",
+        expected: {
+            binary: ["1\xa0KiB", "1.1\xa0KiB", "1.09\xa0KiB"],
+            bytes: 1.12e3,
+            decimal: ["1\xa0kB", "1.1\xa0kB", "1.12\xa0kB"],
+            valid: true,
+        },
+    },
+    {
+        input: "1.12 kB",
+        expected: {
+            binary: ["1KiB", "1.1KiB", "1.09KiB"],
+            bytes: 1.12e3,
+            decimal: ["1kB", "1.1kB", "1.12kB"],
+            valid: true,
+        },
+        format: {
+            space: false,
+        },
+    },
+
     // Intl:
     {
         input: "1,234.56 GiB",
@@ -221,7 +246,9 @@ const testData: {
             decimal: ["1\xa0TB", "1.3\xa0TB", "1.33\xa0TB"],
             valid: true,
         },
-        locale: "en",
+        parse: {
+            locale: "en",
+        },
     },
     {
         input: "1 234,56 GiB",
@@ -231,7 +258,9 @@ const testData: {
             decimal: ["1\xa0TB", "1.3\xa0TB", "1.33\xa0TB"],
             valid: true,
         },
-        locale: "fr",
+        parse: {
+            locale: "fr",
+        },
     },
     {
         input: "-1 234,56 GiB",
@@ -241,7 +270,9 @@ const testData: {
             decimal: ["-1\xa0TB", "-1.3\xa0TB", "-1.33\xa0TB"],
             valid: true,
         },
-        locale: "fr",
+        parse: {
+            locale: "fr",
+        },
     },
 
     // Invalid:
@@ -285,7 +316,7 @@ const testData: {
 
 describe("Bytes", () =>
     testData.forEach(data => {
-        const b = Bytes.fromString(data.input, {locale: data.locale});
+        const b = Bytes.fromString(data.input, data.parse);
 
         it(`isValid: ${data.input} => ${data.expected.valid}`, () =>
             assert.equal(b.isValid(), data.expected.valid));
@@ -297,11 +328,11 @@ describe("Bytes", () =>
 
         data.expected.binary.forEach((v, digits) =>
             it(`toBinary[digits=${digits}]: ${data.input} => ${v}`, () =>
-                assert.equal(b.toBinary({digits}), v)),
+                assert.equal(b.toBinary({...data.format, digits}), v)),
         );
 
         data.expected.decimal.forEach((v, digits) =>
             it(`toDecimal[digits=${digits}]: ${data.input} => ${v}`, () =>
-                assert.equal(b.toDecimal({digits}), v)),
+                assert.equal(b.toDecimal({...data.format, digits}), v)),
         );
     }));
