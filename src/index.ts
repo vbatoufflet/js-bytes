@@ -8,7 +8,7 @@ export class Bytes {
     private value: number | null;
 
     private constructor(value: number) {
-        this.value = !isNaN(value) && value >= 0 ? value : null;
+        this.value = !isNaN(value) ? value : null;
         this.bytesObject = true;
     }
 

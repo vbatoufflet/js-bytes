@@ -7,6 +7,8 @@ export class Parser {
 
     private group = "";
 
+    private minusSign = "-";
+
     private numerals: Map<string, string> | null = null;
 
     private text: string;
@@ -21,10 +23,11 @@ export class Parser {
             //
             // See: https://observablehq.com/@mbostock/localized-number-parsing
             const locale = opts.locale !== true ? opts.locale : undefined;
-            const parts = Intl.NumberFormat(locale).formatToParts(1234.5);
+            const parts = Intl.NumberFormat(locale).formatToParts(-1234.5);
 
             this.decimal = parts.find(a => a.type === "decimal")?.value ?? ".";
             this.group = parts.find(a => a.type === "group")?.value ?? "";
+            this.minusSign = parts.find(a => a.type === "minusSign")?.value ?? "-";
 
             this.numerals = new Map(
                 [...new Intl.NumberFormat(locale, {useGrouping: false}).format(9876543210)]
@@ -75,6 +78,8 @@ export class Parser {
 
             if (c === "") {
                 break;
+            } else if (c === this.minusSign && s.length === 0) {
+                s += "-";
             } else if (this.numerals?.has(c)) {
                 s += this.numerals.get(c);
             } else if (this.numerals === null && isNumeric(c)) {

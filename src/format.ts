@@ -40,7 +40,7 @@ export function format(value: number | null, opts: FormatOpts): string {
     for (const idx in units) {
         // Always use decimal units to choose the one that will format the value, thus preferring
         // "0.98 KiB" over "1000 B".
-        if (value / decimalUnits[idx].value >= 1) {
+        if (Math.abs(value / decimalUnits[idx].value) >= 1) {
             return `${formatNumber(value / units[idx].value, opts)} ${units[idx].text}B`;
         }
     }

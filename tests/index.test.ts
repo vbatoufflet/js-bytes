@@ -202,6 +202,15 @@ const testData: {
             valid: true,
         },
     },
+    {
+        input: "-1000.12 B",
+        expected: {
+            binary: ["-1 KiB", "-1 KiB", "-0.98 KiB"],
+            bytes: -1000,
+            decimal: ["-1 kB", "-1 kB", "-1 kB", "-1 kB", "-1.0001 kB"],
+            valid: true,
+        },
+    },
 
     // Intl:
     {
@@ -220,6 +229,16 @@ const testData: {
             binary: ["1 TiB", "1.2 TiB", "1.21 TiB"],
             bytes: 1.325598706237e12,
             decimal: ["1 TB", "1.3 TB", "1.33 TB"],
+            valid: true,
+        },
+        locale: "fr",
+    },
+    {
+        input: "-1 234,56 GiB",
+        expected: {
+            binary: ["-1 TiB", "-1.2 TiB", "-1.21 TiB"],
+            bytes: -1.325598706237e12,
+            decimal: ["-1 TB", "-1.3 TB", "-1.33 TB"],
             valid: true,
         },
         locale: "fr",
