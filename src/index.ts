@@ -1,4 +1,4 @@
-import {AnyObject, FormatOpts, ParseOpts} from "../types";
+import {FormatOpts, ParseOpts} from "../types";
 import {format} from "./format";
 import {parse} from "./parse";
 
@@ -24,7 +24,7 @@ export class Bytes {
         return this.value !== null;
     }
 
-    public static isBytes(obj: AnyObject): boolean {
+    public static isBytes(obj: Record<string, unknown>): boolean {
         return Boolean(obj.bytesObject);
     }
 

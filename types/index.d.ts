@@ -1,3 +1,4 @@
+/** A Bytes object represent an amount of bytes. */
 export declare class Bytes {
     /**
      * Create a new Bytes object from a bytes value.
@@ -21,7 +22,7 @@ export declare class Bytes {
      * Return whether or not the given object is a valid Bytes one.
      * @param obj - object to check
      */
-    public static isBytes(obj: AnyObject): boolean;
+    public static isBytes(obj: Record<string, unknown>): boolean;
 
     /**
      * Returns a string representation of the Bytes object using binary (i.e. IEC) units.
@@ -46,9 +47,6 @@ export declare class Bytes {
      */
     public toString(opts: FormatOpts): string;
 }
-
-/** Any object */
-export declare type AnyObject = Record<string, unknown>;
 
 /** Formatting options */
 export declare interface FormatOpts {
