@@ -1,5 +1,5 @@
 import {FormatOpts} from "../types";
-import {BinaryUnit, DecimalUnit} from "./unit";
+import {BinaryUnit, byteSuffix, DecimalUnit} from "./unit";
 
 interface UnitRef<T = BinaryUnit | DecimalUnit> {
     text: T;
@@ -65,5 +65,5 @@ function formatValue(value: number, unit: string | null, opts: FormatOpts): stri
         s += unit;
     }
 
-    return `${s}B`;
+    return s + byteSuffix;
 }

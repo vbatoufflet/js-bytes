@@ -1,6 +1,6 @@
 import {ParseOpts} from "../types";
 import {isDigit, isSpace} from "./string";
-import {DecimalUnit} from "./unit";
+import {byteSuffix, DecimalUnit} from "./unit";
 
 const unitPrefixes = Object.values(DecimalUnit).join("").toUpperCase();
 
@@ -54,9 +54,9 @@ export class Parser {
 
         if (
             (this.text.length > 1 && idx === -1) ||
-            (this.text.length === 1 && this.text.charAt(0) !== "B") ||
-            (this.text.length === 2 && this.text.charAt(1) !== "B") ||
-            (this.text.length === 3 && !this.text.endsWith("iB")) ||
+            (this.text.length === 1 && this.text.charAt(0) !== byteSuffix) ||
+            (this.text.length === 2 && this.text.charAt(1) !== byteSuffix) ||
+            (this.text.length === 3 && !this.text.endsWith(`i${byteSuffix}`)) ||
             this.text.length > 3
         ) {
             return null;
