@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.2.0 - (2021-04-16)
+--------------------
+
+* Add support for negative values
+* Add handling of common Unicode space separators
+* New `space` and `suffix` formatting options
+
 0.1.2 - (2021-04-14)
 --------------------
 
