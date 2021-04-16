@@ -358,21 +358,20 @@ describe("Bytes", () =>
     testData.forEach(data => {
         const b = Bytes.fromString(data.input, data.parse);
 
-        it(`isValid: ${data.input} => ${data.expected.valid}`, () =>
-            assert.equal(b.isValid(), data.expected.valid));
+        it(`${data.input}: isValid`, () => assert.equal(b.isValid(), data.expected.valid));
 
-        it(`toBytes: ${data.input} => ${data.expected.bytes}`, () =>
+        it(`${data.input}: toBytes`, () =>
             isNaN(data.expected.bytes)
                 ? assert.isNaN(b.toBytes())
                 : assert.equal(b.toBytes(), data.expected.bytes));
 
         data.expected.binary.forEach((v, digits) =>
-            it(`toBinary[digits=${digits}]: ${data.input} => ${v}`, () =>
+            it(`${data.input}: toBinary[digits=${digits}]`, () =>
                 assert.equal(b.toBinary({...data.format, digits}), v)),
         );
 
         data.expected.decimal.forEach((v, digits) =>
-            it(`toDecimal[digits=${digits}]: ${data.input} => ${v}`, () =>
+            it(`${data.input}: toDecimal[digits=${digits}]`, () =>
                 assert.equal(b.toDecimal({...data.format, digits}), v)),
         );
     }));
