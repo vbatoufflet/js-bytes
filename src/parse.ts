@@ -40,35 +40,45 @@ export class Parser {
     }
 
     public parse(): number | null {
-        let value = this.scanNumber();
+        const value = this.scanNumber();
         if (value === null) {
             return null;
         }
 
-        if (isSpace(this.text.charAt(0))) {
-            this.text = this.text.slice(1);
+        if (isSpace(this.peek())) {
+            this.read();
         }
 
-        const c = this.text.charAt(0);
-        const idx = c === "k" ? 0 : unitPrefixes.indexOf(c);
+        const c = this.read();
+        if (c === "" || c === byteSuffix) {
+            return value;
+        }
 
-        if (
-            (this.text.length > 1 && idx === -1) ||
-            (this.text.length === 1 && this.text.charAt(0) !== byteSuffix) ||
-            (this.text.length === 2 && this.text.charAt(1) !== byteSuffix) ||
-            (this.text.length === 3 && !this.text.endsWith(`i${byteSuffix}`)) ||
-            this.text.length > 3
-        ) {
+        const idx = c === "k" ? 0 : unitPrefixes.indexOf(c);
+        if (idx === -1) {
             return null;
         }
 
-        const binary = this.text.length === 3;
-
-        if (idx !== -1) {
-            value *= Math.pow(binary ? 1024 : 1000, idx + 1);
+        const binary = this.peek() === "i";
+        if (binary) {
+            this.read();
         }
 
-        return value;
+        if (this.text.length > 1 || this.read() !== byteSuffix) {
+            return null;
+        }
+
+        return value * Math.pow(binary ? 1024 : 1000, idx + 1);
+    }
+
+    private peek(): string {
+        return this.text.charAt(0);
+    }
+
+    private read(): string {
+        const c = this.text.charAt(0);
+        this.text = this.text.slice(1);
+        return c;
     }
 
     private scanNumber(): number | null {
@@ -77,8 +87,7 @@ export class Parser {
         let decimal = false;
 
         for (;;) {
-            c = this.text.charAt(0);
-            this.text = this.text.slice(1);
+            c = this.read();
 
             if (c === "") {
                 break;
@@ -98,7 +107,7 @@ export class Parser {
             } else if (c === this.group || (isSpace(c) && isSpace(this.group))) {
                 continue;
             } else {
-                this.text = c + this.text;
+                this.unread(c);
                 break;
             }
         }
@@ -106,6 +115,10 @@ export class Parser {
         const v = Number.parseFloat(s);
 
         return !isNaN(v) ? v : null;
+    }
+
+    private unread(c: string): void {
+        this.text = c + this.text;
     }
 }
 
