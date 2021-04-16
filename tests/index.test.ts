@@ -214,7 +214,7 @@ const testData: {
         },
     },
 
-    // Without space and/or suffix:
+    // With formatting options:
     {
         input: "1.12kB",
         expected: {
@@ -270,6 +270,18 @@ const testData: {
         },
         format: {
             suffix: false,
+        },
+    },
+    {
+        input: "1.12 KiB",
+        expected: {
+            binary: ["+1\xa0KiB", "+1.1\xa0KiB", "+1.12\xa0KiB"],
+            bytes: 1.147e3,
+            decimal: ["+1\xa0kB", "+1.1\xa0kB", "+1.15\xa0kB"],
+            valid: true,
+        },
+        format: {
+            sign: true,
         },
     },
     {

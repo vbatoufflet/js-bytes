@@ -68,6 +68,11 @@ export declare interface FormatOpts {
     locale?: string | true;
 
     /**
+     * Always print the sign associated with the numeric bytes value.
+     */
+    sign?: boolean;
+
+    /**
      * Add a space between the value and its unit, with default to `true`.
      */
     space?: boolean;

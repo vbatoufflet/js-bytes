@@ -59,6 +59,10 @@ function formatValue(value: number, unit: string | null, opts: FormatOpts): stri
         ? v.toLocaleString(opts.locale !== true ? opts.locale : undefined)
         : v.toString();
 
+    if (opts.sign && v > 0) {
+        s = `+${s}`;
+    }
+
     if (opts.space && (unit !== null || opts.suffix)) {
         s += "\xa0";
     }
