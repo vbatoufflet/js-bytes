@@ -71,6 +71,11 @@ export declare interface FormatOpts {
      * Add a space between the value and its unit, with default to `true`.
      */
     space?: boolean;
+
+    /**
+     * Append the bytes suffix to the formatted string, with default to `true`.
+     */
+    suffix?: boolean;
 }
 
 /** Parsing options */

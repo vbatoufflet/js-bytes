@@ -26,6 +26,7 @@ const formatDefaults: FormatOpts = {
     base: 2,
     digits: 2,
     space: true,
+    suffix: true,
 };
 
 export function format(value: number | null, opts: FormatOpts): string {
@@ -58,12 +59,17 @@ function formatValue(value: number, unit: string | null, opts: FormatOpts): stri
         ? v.toLocaleString(opts.locale !== true ? opts.locale : undefined)
         : v.toString();
 
-    if (opts.space) {
+    if (opts.space && (unit !== null || opts.suffix)) {
         s += "\xa0";
     }
+
     if (unit !== null) {
         s += unit;
     }
 
-    return s + byteSuffix;
+    if (opts.suffix) {
+        s += byteSuffix;
+    }
+
+    return s;
 }

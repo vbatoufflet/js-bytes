@@ -214,7 +214,7 @@ const testData: {
         },
     },
 
-    // Without space:
+    // Without space and/or suffix:
     {
         input: "1.12kB",
         expected: {
@@ -234,6 +234,55 @@ const testData: {
         },
         format: {
             space: false,
+        },
+    },
+    {
+        input: "1",
+        expected: {
+            binary: ["1", "1", "1"],
+            bytes: 1,
+            decimal: ["1", "1", "1"],
+            valid: true,
+        },
+        format: {
+            suffix: false,
+        },
+    },
+    {
+        input: "1.12 k",
+        expected: {
+            binary: ["1\xa0Ki", "1.1\xa0Ki", "1.09\xa0Ki"],
+            bytes: 1.12e3,
+            decimal: ["1\xa0k", "1.1\xa0k", "1.12\xa0k"],
+            valid: true,
+        },
+        format: {
+            suffix: false,
+        },
+    },
+    {
+        input: "1.12 Ki",
+        expected: {
+            binary: ["1\xa0Ki", "1.1\xa0Ki", "1.12\xa0Ki"],
+            bytes: 1.147e3,
+            decimal: ["1\xa0k", "1.1\xa0k", "1.15\xa0k"],
+            valid: true,
+        },
+        format: {
+            suffix: false,
+        },
+    },
+    {
+        input: "1234.56Gi",
+        expected: {
+            binary: ["1Ti", "1.2Ti", "1.21Ti"],
+            bytes: 1.325598706237e12,
+            decimal: ["1T", "1.3T", "1.33T"],
+            valid: true,
+        },
+        format: {
+            space: false,
+            suffix: false,
         },
     },
 
@@ -278,15 +327,6 @@ const testData: {
     // Invalid:
     {
         input: "abc",
-        expected: {
-            binary: ["Invalid Bytes"],
-            bytes: NaN,
-            decimal: ["Invalid Bytes"],
-            valid: false,
-        },
-    },
-    {
-        input: "1 G",
         expected: {
             binary: ["Invalid Bytes"],
             bytes: NaN,

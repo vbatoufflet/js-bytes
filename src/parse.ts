@@ -64,7 +64,7 @@ export class Parser {
             this.read();
         }
 
-        if (this.text.length > 1 || this.read() !== byteSuffix) {
+        if (this.text.length > 1 || (this.text.length === 1 && this.read() !== byteSuffix)) {
             return null;
         }
 
