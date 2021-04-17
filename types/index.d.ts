@@ -42,7 +42,8 @@ export declare class Bytes {
     public toDecimal(opts: FormatOpts): string;
 
     /**
-     * Returns a string representation of the Bytes object according to provided formatting options.
+     * Returns a string representation of the Bytes object according to provided formatting
+     * options.
      * @param opts - formatting options
      */
     public toString(opts: FormatOpts): string;
@@ -51,8 +52,7 @@ export declare class Bytes {
 /** Formatting options */
 export declare interface FormatOpts {
     /**
-     * Base to use for number formatting: `2` for binary mode (IEC) or `10`
-     * for decimal mode (SI).
+     * Base to use for number formatting: `2` for binary mode (IEC) or `10` for decimal mode (SI).
      */
     base?: 2 | 10;
 
@@ -62,8 +62,8 @@ export declare interface FormatOpts {
     digits?: number;
 
     /**
-     * Format number according to a given locale. It uses the default locale
-     * if set to `true`, and support is disabled when omitted.
+     * Format number according to a given locale. It uses the default locale if set to `true`, and
+     * support is disabled when omitted.
      */
     locale?: string | true;
 
@@ -86,8 +86,8 @@ export declare interface FormatOpts {
 /** Parsing options */
 export declare interface ParseOpts {
     /**
-     * Parse number according to a given locale. It uses the default locale
-     * if set to `true`, and support is disabled when omitted.
+     * Parse number according to a given locale. It uses the default locale if set to `true`, and
+     * support is disabled when omitted.
      */
     locale?: string | true;
 }
