@@ -8,8 +8,8 @@ export class Bytes {
 
     private value: number | null;
 
-    private constructor(value: number) {
-        this.value = !isNaN(value) ? value : null;
+    private constructor(value: number | null) {
+        this.value = value === null || isNaN(value) ? null : value;
         this.bytesObject = true;
     }
 
@@ -18,7 +18,7 @@ export class Bytes {
     }
 
     public static fromString(text: string, opts?: ParseOpts): Bytes {
-        return new Bytes(parseString(text, opts) as number);
+        return new Bytes(parseString(text, opts));
     }
 
     public isValid(): boolean {
