@@ -1,7 +1,7 @@
 import {FormatBinaryUnit, FormatDecimalUnit, FormatOpts, ParseOpts} from "@/types";
 
 import {format} from "./format";
-import {parseString} from "./parse";
+import {parseFormat, parseString} from "./parse";
 
 export class Bytes {
     protected bytesObject: boolean;
@@ -39,6 +39,20 @@ export class Bytes {
 
     public toDecimal(opts?: FormatOpts<FormatDecimalUnit>): string {
         return format(this.value, {...opts, base: 10});
+    }
+
+    public toFormat(format: string, opts?: FormatOpts): string {
+        const spec = parseFormat(format);
+
+        let out = spec.text;
+        spec.formats.reverse().forEach(fmt => {
+            out =
+                out.slice(0, fmt.index) +
+                this.toString({...fmt.opts, ...opts}) +
+                out.slice(fmt.index);
+        });
+
+        return out;
     }
 
     public toString(opts?: FormatOpts): string {

@@ -1,5 +1,6 @@
-import {ParseOpts} from "@/types";
+import {FormatOpts, ParseOpts} from "@/types";
 
+import {FormatSpec} from "./format";
 import {isDigit, isSpace} from "./string";
 import {binaryUnits, byteSuffix, decimalUnits} from "./unit";
 
@@ -16,6 +17,8 @@ export class Parser {
     private minusSign = "-";
 
     private numerals: Map<string, string> | null = null;
+
+    private pos = -1;
 
     private text: string;
 
@@ -41,6 +44,32 @@ export class Parser {
                     .map((value, index) => [value, index.toString()]),
             );
         }
+    }
+
+    public parseFormat(): FormatSpec {
+        const str: FormatSpec = {
+            text: "",
+            formats: [],
+        };
+
+        let c: string;
+
+        for (;;) {
+            c = this.read();
+
+            if (c === "") {
+                break;
+            } else if (c === "%" && this.peek() !== "%") {
+                str.formats.push({index: str.text.length, opts: this.scanVerb()});
+            } else {
+                if (c === "%") {
+                    this.read();
+                }
+                str.text += c;
+            }
+        }
+
+        return str;
     }
 
     public parseString(): number {
@@ -81,11 +110,14 @@ export class Parser {
 
     private read(): string {
         const c = this.text.charAt(0);
+
+        this.pos++;
         this.text = this.text.slice(1);
+
         return c;
     }
 
-    private scanNumber(): number {
+    private scanNumber(decimal = true): number {
         let c: string;
         let s = "";
 
@@ -100,7 +132,7 @@ export class Parser {
                 s += this.numerals.get(c);
             } else if (this.numerals === null && isDigit(c)) {
                 s += c;
-            } else if (c === this.decimal) {
+            } else if (decimal && c === this.decimal) {
                 if (s.includes(".")) {
                     this.unread(c);
                     break;
@@ -118,9 +150,68 @@ export class Parser {
         return Number.parseFloat(s);
     }
 
+    private scanVerb(): FormatOpts {
+        const save = this.text;
+        const opts: FormatOpts = {};
+
+        let c = this.read();
+
+        while (c !== "" && "+!".includes(c)) {
+            switch (c) {
+                case "+":
+                    opts.sign = true;
+                    break;
+
+                case "!":
+                    opts.space = false;
+                    opts.suffix = false;
+                    break;
+            }
+
+            c = this.read();
+        }
+
+        if (isDigit(c)) {
+            this.unread(c);
+            opts.width = this.scanNumber(false);
+            c = this.read();
+        }
+
+        if (c === ".") {
+            opts.digits = isDigit(this.peek()) ? this.scanNumber(false) : 0;
+            c = this.read();
+        }
+
+        if (c === "" || isSpace(c)) {
+            throw SyntaxError(`missing format verb: %${save.slice(0, this.pos - 1)}`);
+        }
+
+        if (c === "b") {
+            opts.unit = "bytes";
+            return opts;
+        }
+
+        const idx = unitPrefixes.indexOf(c.toUpperCase());
+        if (idx === -1) {
+            throw SyntaxError(`unknown format verb: %${c}`);
+        }
+
+        const binary = c === c.toUpperCase();
+
+        opts.base = binary ? 2 : 10;
+        opts.unit = binary ? binaryUnits[idx].format : decimalUnits[idx].format;
+
+        return opts;
+    }
+
     private unread(c: string): void {
+        this.pos--;
         this.text = c + this.text;
     }
+}
+
+export function parseFormat(format: string): FormatSpec {
+    return new Parser(format).parseFormat();
 }
 
 export function parseString(text: string, opts?: ParseOpts): number {

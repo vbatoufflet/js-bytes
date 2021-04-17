@@ -2,418 +2,270 @@ import {assert} from "chai";
 import {it} from "mocha";
 
 import {Bytes} from "@/src";
-import {FormatBinaryUnit, FormatDecimalUnit, FormatOpts, ParseOpts} from "@/types";
+import {FormatOpts, ParseOpts} from "@/types";
 
 const testData: {
-    input: string;
+    input: number | string;
     expected: {
-        binary: string[];
         bytes: number;
-        decimal: string[];
+        output: string;
         valid: boolean;
     };
-    format?: FormatOpts;
-    parse?: ParseOpts;
+    formatSpec?: string;
+    formatOpts?: FormatOpts;
+    parseOpts?: ParseOpts;
 }[] = [
     {
+        input: 0,
+        expected: {valid: true, bytes: 0, output: "0\xa0B"},
+    },
+    {
+        input: "0",
+        expected: {valid: true, bytes: 0, output: "0\xa0B"},
+    },
+    {
         input: "0 B",
-        expected: {
-            binary: ["0\xa0B", "0\xa0B", "0\xa0B"],
-            bytes: 0,
-            decimal: ["0\xa0B", "0\xa0B", "0\xa0B"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 0, output: "0\xa0B"},
     },
     {
-        input: "0 KiB",
-        expected: {
-            binary: ["0\xa0B", "0\xa0B", "0\xa0B"],
-            bytes: 0,
-            decimal: ["0\xa0B", "0\xa0B", "0\xa0B"],
-            valid: true,
-        },
+        input: "0.12 B",
+        expected: {valid: true, bytes: 0, output: "0\xa0B"},
     },
     {
-        input: "0.001 kB",
-        expected: {
-            binary: ["1\xa0B", "1\xa0B", "1\xa0B"],
-            bytes: 1,
-            decimal: ["1\xa0B", "1\xa0B", "1\xa0B"],
-            valid: true,
-        },
+        input: 1,
+        expected: {valid: true, bytes: 1, output: "1\xa0B"},
     },
     {
-        input: "0.1 KiB",
-        expected: {
-            binary: ["102\xa0B", "102\xa0B", "102\xa0B"],
-            bytes: 102,
-            decimal: ["102\xa0B", "102\xa0B", "102\xa0B"],
-            valid: true,
-        },
-    },
-    {
-        input: "0.1 B",
-        expected: {
-            binary: ["0\xa0B", "0\xa0B", "0\xa0B"],
-            bytes: 0,
-            decimal: ["0\xa0B", "0\xa0B", "0\xa0B"],
-            valid: true,
-        },
+        input: "1",
+        expected: {valid: true, bytes: 1, output: "1\xa0B"},
     },
     {
         input: "1 B",
-        expected: {
-            binary: ["1\xa0B", "1\xa0B", "1\xa0B"],
-            bytes: 1,
-            decimal: ["1\xa0B", "1\xa0B", "1\xa0B"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 1, output: "1\xa0B"},
+    },
+    {
+        input: "0 KiB",
+        expected: {valid: true, bytes: 0, output: "0\xa0B"},
+    },
+    {
+        input: "0kB",
+        expected: {valid: true, bytes: 0, output: "0\xa0B"},
+    },
+    {
+        input: "0kB",
+        expected: {valid: true, bytes: 0, output: "0\xa0GB"},
+        formatSpec: "%g",
+    },
+    {
+        input: "0.001 kB",
+        expected: {valid: true, bytes: 1, output: "1\xa0B"},
+    },
+    {
+        input: "0.001 kB",
+        expected: {valid: true, bytes: 1, output: "0\xa0GB"},
+        formatSpec: "%g",
+    },
+    {
+        input: "0.1 KiB",
+        expected: {valid: true, bytes: 102, output: "102\xa0B"},
+    },
+    {
+        input: "0.1 KiB",
+        expected: {valid: true, bytes: 102, output: "0.1\xa0kB"},
+        formatSpec: "%k",
+    },
+    {
+        input: "0.1 KiB",
+        expected: {valid: true, bytes: 102, output: "0\xa0kB"},
+        formatSpec: "%.k",
+    },
+    {
+        input: "0.1 KiB",
+        expected: {valid: true, bytes: 102, output: "0.1\xa0KiB"},
+        formatSpec: "%K",
+    },
+    {
+        input: "0.1 KiB",
+        expected: {valid: true, bytes: 102, output: "0\xa0KiB"},
+        formatSpec: "%.K",
     },
     {
         input: "1 kB",
-        expected: {
-            binary: ["1\xa0KiB", "1\xa0KiB", "0.98\xa0KiB"],
-            bytes: 1e3,
-            decimal: ["1\xa0kB"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 1e3, output: "0.98\xa0KiB"},
     },
     {
         input: "1 KiB",
-        expected: {
-            binary: ["1\xa0KiB", "1\xa0KiB", "1\xa0KiB"],
-            bytes: 1024,
-            decimal: ["1\xa0kB", "1\xa0kB", "1.02\xa0kB"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 1024, output: "1.02\xa0kB"},
+        formatSpec: "%k",
+    },
+    {
+        input: "1 KiB",
+        expected: {valid: true, bytes: 1024, output: "1\xa0kB"},
+        formatSpec: "%.k",
     },
     {
         input: "1.12 kB",
-        expected: {
-            binary: ["1\xa0KiB", "1.1\xa0KiB", "1.09\xa0KiB"],
-            bytes: 1.12e3,
-            decimal: ["1\xa0kB", "1.1\xa0kB", "1.12\xa0kB"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 1.12e3, output: "1.09\xa0KiB"},
     },
     {
-        input: "1.12 KiB",
-        expected: {
-            binary: ["1\xa0KiB", "1.1\xa0KiB", "1.12\xa0KiB"],
-            bytes: 1.147e3,
-            decimal: ["1\xa0kB", "1.1\xa0kB", "1.15\xa0kB"],
-            valid: true,
-        },
+        input: "1.12 kB",
+        expected: {valid: true, bytes: 1.12e3, output: "1\xa0KiB"},
+        formatSpec: "%.K",
     },
     {
-        input: "1.12 MB",
-        expected: {
-            binary: ["1\xa0MiB", "1.1\xa0MiB", "1.07\xa0MiB"],
-            bytes: 1.12e6,
-            decimal: ["1\xa0MB", "1.1\xa0MB", "1.12\xa0MB"],
-            valid: true,
-        },
+        input: "1.12 kB",
+        expected: {valid: true, bytes: 1.12e3, output: "1.1\xa0KiB"},
+        formatSpec: "%.1K",
     },
     {
-        input: "1.12 MiB",
-        expected: {
-            binary: ["1\xa0MiB", "1.1\xa0MiB", "1.12\xa0MiB"],
-            bytes: 1.174405e6,
-            decimal: ["1\xa0MB", "1.2\xa0MB", "1.17\xa0MB"],
-            valid: true,
-        },
+        input: "1.12 kB",
+        expected: {valid: true, bytes: 1.12e3, output: "0\xa0MiB"},
+        formatSpec: "%M",
     },
     {
-        input: "1.12 TB",
-        expected: {
-            binary: ["1\xa0TiB", "1\xa0TiB", "1.02\xa0TiB"],
-            bytes: 1.12e12,
-            decimal: ["1\xa0TB", "1.1\xa0TB", "1.12\xa0TB"],
-            valid: true,
-        },
-    },
-    {
-        input: "1.12 TiB",
-        expected: {
-            binary: ["1\xa0TiB", "1.1\xa0TiB", "1.12\xa0TiB"],
-            bytes: 1.231453023109e12,
-            decimal: ["1\xa0TB", "1.2\xa0TB", "1.23\xa0TB"],
-            valid: true,
-        },
-    },
-    {
-        input: "1.12 B",
-        expected: {
-            binary: ["1\xa0B", "1\xa0B", "1\xa0B"],
-            bytes: 1,
-            decimal: ["1\xa0B", "1\xa0B", "1\xa0B"],
-            valid: true,
-        },
+        input: "1.12 kB",
+        expected: {valid: true, bytes: 1.12e3, output: "0.001\xa0MiB"},
+        formatSpec: "%.3M",
     },
     {
         input: "1000 B",
-        expected: {
-            binary: ["1\xa0KiB", "1\xa0KiB", "0.98\xa0KiB"],
-            bytes: 1e3,
-            decimal: ["1\xa0kB", "1\xa0kB", "1\xa0kB"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 1e3, output: "0.98\xa0KiB"},
     },
     {
-        input: "1000 kB",
-        expected: {
-            binary: ["1\xa0MiB", "1\xa0MiB", "0.95\xa0MiB"],
-            bytes: 1e6,
-            decimal: ["1\xa0MB", "1\xa0MB", "1\xa0MB"],
-            valid: true,
-        },
-    },
-    {
-        input: "1000 KiB",
-        expected: {
-            binary: ["1\xa0MiB", "1\xa0MiB", "0.98\xa0MiB"],
-            bytes: 1.024e6,
-            decimal: ["1\xa0MB", "1\xa0MB", "1.02\xa0MB"],
-            valid: true,
-        },
+        input: "1000 B",
+        expected: {valid: true, bytes: 1e3, output: "1\xa0kB"},
+        formatSpec: "%k",
     },
     {
         input: "1000.12 kB",
-        expected: {
-            binary: ["1\xa0MiB", "1\xa0MiB", "0.95\xa0MiB"],
-            bytes: 1.00012e6,
-            decimal: ["1\xa0MB", "1\xa0MB", "1\xa0MB", "1\xa0MB", "1.0001\xa0MB"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 1.00012e6, output: "0.95\xa0MiB"},
     },
     {
-        input: "1000.12 KiB",
-        expected: {
-            binary: ["1\xa0MiB", "1\xa0MiB", "0.98\xa0MiB"],
-            bytes: 1.024123e6,
-            decimal: ["1\xa0MB", "1\xa0MB", "1.02\xa0MB"],
-            valid: true,
-        },
+        input: "1000.12 kB",
+        expected: {valid: true, bytes: 1.00012e6, output: "1\xa0MiB"},
+        formatSpec: "%.1M",
+    },
+    {
+        input: "1000.12 kB",
+        expected: {valid: true, bytes: 1.00012e6, output: "1\xa0MB"},
+        formatSpec: "%m",
+    },
+    {
+        input: "1000.12 kB",
+        expected: {valid: true, bytes: 1.00012e6, output: "1.0001\xa0MB"},
+        formatSpec: "%.4m",
     },
     {
         input: "1000.12 B",
-        expected: {
-            binary: ["1\xa0KiB", "1\xa0KiB", "0.98\xa0KiB"],
-            bytes: 1000,
-            decimal: ["1\xa0kB", "1\xa0kB", "1\xa0kB", "1\xa0kB", "1.0001\xa0kB"],
-            valid: true,
-        },
+        expected: {valid: true, bytes: 1000, output: "0.98\xa0KiB"},
     },
     {
-        input: "-1000.12 B",
-        expected: {
-            binary: ["-1\xa0KiB", "-1\xa0KiB", "-0.98\xa0KiB"],
-            bytes: -1000,
-            decimal: ["-1\xa0kB", "-1\xa0kB", "-1\xa0kB", "-1\xa0kB", "-1.0001\xa0kB"],
-            valid: true,
-        },
+        input: "1000.12 B",
+        expected: {valid: true, bytes: 1000, output: "0.001\xa0MB"},
+        formatSpec: "%.4m",
+    },
+    {
+        input: "1000.12 GiB",
+        expected: {valid: true, bytes: 1.073870673019e12, output: "0.98\xa0TiB"},
+    },
+    {
+        input: "1000.12 GiB",
+        expected: {valid: true, bytes: 1.073870673019e12, output: "1073870.673\xa0MB"},
+        formatSpec: "%.4m",
+    },
+    {
+        input: "-1000.12 GiB",
+        expected: {valid: true, bytes: -1.073870673019e12, output: "-0.98\xa0TiB"},
     },
 
     // With formatting options:
     {
-        input: "1.12kB",
-        expected: {
-            binary: ["1\xa0KiB", "1.1\xa0KiB", "1.09\xa0KiB"],
-            bytes: 1.12e3,
-            decimal: ["1\xa0kB", "1.1\xa0kB", "1.12\xa0kB"],
-            valid: true,
-        },
+        input: "1.12 kB",
+        expected: {valid: true, bytes: 1.12e3, output: "1.12k"},
+        formatSpec: "%!k",
     },
     {
         input: "1.12 kB",
-        expected: {
-            binary: ["1KiB", "1.1KiB", "1.09KiB"],
-            bytes: 1.12e3,
-            decimal: ["1kB", "1.1kB", "1.12kB"],
-            valid: true,
-        },
-        format: {
-            space: false,
-        },
+        expected: {valid: true, bytes: 1.12e3, output: "1.09Ki"},
+        formatSpec: "%!K",
     },
     {
         input: "1",
-        expected: {
-            binary: ["1", "1", "1"],
-            bytes: 1,
-            decimal: ["1", "1", "1"],
-            valid: true,
-        },
-        format: {
-            suffix: false,
-        },
+        expected: {valid: true, bytes: 1, output: "1"},
+        formatOpts: {suffix: false},
     },
     {
         input: "1.12 k",
-        expected: {
-            binary: ["1\xa0Ki", "1.1\xa0Ki", "1.09\xa0Ki"],
-            bytes: 1.12e3,
-            decimal: ["1\xa0k", "1.1\xa0k", "1.12\xa0k"],
-            valid: true,
-        },
-        format: {
-            suffix: false,
-        },
-    },
-    {
-        input: "1.12 Ki",
-        expected: {
-            binary: ["1\xa0Ki", "1.1\xa0Ki", "1.12\xa0Ki"],
-            bytes: 1.147e3,
-            decimal: ["1\xa0k", "1.1\xa0k", "1.15\xa0k"],
-            valid: true,
-        },
-        format: {
-            suffix: false,
-        },
+        expected: {valid: true, bytes: 1.12e3, output: "1.12\xa0k"},
+        formatOpts: {base: 10, suffix: false},
     },
     {
         input: "1.12 KiB",
-        expected: {
-            binary: ["+1\xa0KiB", "+1.1\xa0KiB", "+1.12\xa0KiB"],
-            bytes: 1.147e3,
-            decimal: ["+1\xa0kB", "+1.1\xa0kB", "+1.15\xa0kB"],
-            valid: true,
-        },
-        format: {
-            sign: true,
-        },
+        expected: {valid: true, bytes: 1.147e3, output: "+1.15\xa0kB"},
+        formatSpec: "%+k",
     },
     {
-        input: "1234.56Gi",
-        expected: {
-            binary: ["1Ti", "1.2Ti", "1.21Ti"],
-            bytes: 1.325598706237e12,
-            decimal: ["1T", "1.3T", "1.33T"],
-            valid: true,
-        },
-        format: {
-            space: false,
-            suffix: false,
-        },
-    },
-    {
-        input: "1.12 MB",
-        expected: {
-            binary: ["1094\xa0KiB", "1093.8\xa0KiB", "1093.75\xa0KiB"],
-            bytes: 1.12e6,
-            decimal: [],
-            valid: true,
-        },
-        format: {
-            unit: "kibibytes",
-        },
-    },
-    {
-        input: "1.12 MiB",
-        expected: {
-            binary: [],
-            bytes: 1.174405e6,
-            decimal: ["1174\xa0kB", "1174.4\xa0kB", "1174.41\xa0kB"],
-            valid: true,
-        },
-        format: {
-            unit: "kilobytes",
-        },
+        input: "-1234.56Gi",
+        expected: {valid: true, bytes: -1.325598706237e12, output: "-1.33T"},
+        formatOpts: {base: 10, space: false, suffix: false},
     },
 
     // Intl:
     {
         input: "1,234.56 GiB",
-        expected: {
-            binary: ["1\xa0TiB", "1.2\xa0TiB", "1.21\xa0TiB"],
-            bytes: 1.325598706237e12,
-            decimal: ["1\xa0TB", "1.3\xa0TB", "1.33\xa0TB"],
-            valid: true,
-        },
-        parse: {
-            locale: "en",
-        },
+        expected: {valid: true, bytes: 1.325598706237e12, output: "1.21\xa0TiB"},
+        parseOpts: {locale: "en"},
     },
     {
-        input: "1 234,56 GiB",
-        expected: {
-            binary: ["1\xa0TiB", "1.2\xa0TiB", "1.21\xa0TiB"],
-            bytes: 1.325598706237e12,
-            decimal: ["1\xa0TB", "1.3\xa0TB", "1.33\xa0TB"],
-            valid: true,
-        },
-        parse: {
-            locale: "fr",
-        },
-    },
-    {
-        input: "-1 234,56 GiB",
-        expected: {
-            binary: ["-1\xa0TiB", "-1.2\xa0TiB", "-1.21\xa0TiB"],
-            bytes: -1.325598706237e12,
-            decimal: ["-1\xa0TB", "-1.3\xa0TB", "-1.33\xa0TB"],
-            valid: true,
-        },
-        parse: {
-            locale: "fr",
-        },
+        input: "1,234.56 GiB",
+        expected: {valid: true, bytes: 1.325598706237e12, output: "1,33\xa0TB"},
+        formatOpts: {base: 10, locale: "fr"},
+        parseOpts: {locale: "en"},
     },
 
     // Invalid:
     {
         input: "abc",
-        expected: {
-            binary: ["Invalid Bytes"],
-            bytes: NaN,
-            decimal: ["Invalid Bytes"],
-            valid: false,
-        },
+        expected: {valid: false, bytes: NaN, output: "Invalid Bytes"},
     },
     {
         input: "1,0 GiB",
-        expected: {
-            binary: ["Invalid Bytes"],
-            bytes: NaN,
-            decimal: ["Invalid Bytes"],
-            valid: false,
-        },
+        expected: {valid: false, bytes: NaN, output: "Invalid Bytes"},
+    },
+    {
+        input: "1.12 AiB",
+        expected: {valid: false, bytes: NaN, output: "Invalid Bytes"},
     },
     {
         input: "1-0 GiB",
-        expected: {
-            binary: ["Invalid Bytes"],
-            bytes: NaN,
-            decimal: ["Invalid Bytes"],
-            valid: false,
-        },
+        expected: {valid: false, bytes: NaN, output: "Invalid Bytes"},
     },
 ];
 
-describe("Bytes", () =>
+describe("Bytes", () => {
     testData.forEach(data => {
-        const b = Bytes.fromString(data.input, data.parse);
+        const b =
+            typeof data.input === "number"
+                ? Bytes.fromBytes(data.input)
+                : Bytes.fromString(data.input, data.parseOpts);
 
-        it(`${data.input}: isValid`, () => assert.equal(b.isValid(), data.expected.valid));
+        it(`${data.input}: isValid() => ${data.expected.valid}`, () =>
+            assert.equal(b.isValid(), data.expected.valid));
 
-        it(`${data.input}: toBytes`, () =>
+        it(`${data.input}: toBytes() => ${data.expected.bytes}`, () =>
             isNaN(data.expected.bytes)
                 ? assert.isNaN(b.toBytes())
                 : assert.equal(b.toBytes(), data.expected.bytes));
 
-        data.expected.binary.forEach((v, digits) =>
-            it(`${data.input}: toBinary[digits=${digits}]`, () =>
+        if (data.formatSpec) {
+            it(`${data.input}: toFormat("${data.formatSpec}") => "${data.expected.output}"`, () =>
                 assert.equal(
-                    b.toBinary({...data.format, digits} as FormatOpts<FormatBinaryUnit>),
-                    v,
-                )),
-        );
-
-        data.expected.decimal.forEach((v, digits) =>
-            it(`${data.input}: toDecimal[digits=${digits}]`, () =>
-                assert.equal(
-                    b.toDecimal({...data.format, digits} as FormatOpts<FormatDecimalUnit>),
-                    v,
-                )),
-        );
-    }));
+                    b.toFormat(data.formatSpec as string, data.formatOpts),
+                    data.expected.output,
+                ));
+        } else {
+            it(`${data.input}: toString() => "${data.expected.output}"`, () =>
+                assert.equal(b.toString(data.formatOpts), data.expected.output));
+        }
+    });
+});

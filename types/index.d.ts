@@ -1,7 +1,7 @@
 /** A Bytes object represent an amount of bytes. */
 export declare class Bytes {
     /**
-     * Create a new Bytes object from a bytes value.
+     * Create a new Bytes object from a numeric value.
      * @param value - bytes value
      */
     public static fromBytes(value: number): Bytes;
@@ -19,8 +19,8 @@ export declare class Bytes {
     public isValid(): boolean;
 
     /**
-     * Return whether or not the given object is a valid Bytes one.
-     * @param obj - object to check
+     * Return whether or not the given object is a Bytes one.
+     * @param obj - object to inspect
      */
     public static isBytes(obj: Record<string, unknown>): boolean;
 
@@ -40,6 +40,52 @@ export declare class Bytes {
      * @param opts - formatting options
      */
     public toDecimal(opts?: FormatOpts<FormatDecimalUnit>): string;
+
+    /**
+     * Returns a string representation of the Bytes object using a format specifier. Its verbs
+     * syntax is greatly inspired by C's printf.
+     *
+     * Verbs:
+     * ```
+     * %b   bytes
+     * %k   kilobytes
+     * %m   megabytes
+     * %g   gigabytes
+     * %t   terabytes
+     * %p   petabytes
+     * %K   kibibytes
+     * %M   mebibytes
+     * %G   gibibytes
+     * %T   tebibytes
+     * %P   pebibytes
+     * ```
+     *
+     * Width can be specified by a decimal number preceding the verb and the digits precision by
+     * another decimal number directly following the width, separated by a period. Both are
+     * optional and defaults will apply when omitted.
+     *
+     * Examples:
+     * ```
+     * %g      width: default   digits: default
+     * %4g     width: 4         digits: default
+     * %4.g    width: 4         digits: 0
+     * %4.2g   width: 4         digits: 2
+     * %.2g    width: default   digits: 2
+     * ```
+     *
+     * Extra modifiers are supported to alter the output format, they must precede the width and
+     * digits precision numbers.
+     *
+     * Modifiers:
+     * ```
+     * +   always print the numeric value sign
+     * !   use short form (no space, no suffix)
+     * ```
+     *
+     * @param format - format specifier
+     * @param opts - formatting options
+     */
+    public toFormat(format: string, opts?: FormatOpts): string;
 
     /**
      * Returns a string representation of the Bytes object according to provided formatting

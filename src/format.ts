@@ -2,6 +2,14 @@ import {FormatOpts} from "@/types";
 
 import {binaryUnits, byteSuffix, decimalUnits} from "./unit";
 
+export interface FormatSpec {
+    text: string;
+    formats: {
+        index: number;
+        opts: FormatOpts;
+    }[];
+}
+
 const formatDefaults: FormatOpts = {
     base: 2,
     digits: 2,
