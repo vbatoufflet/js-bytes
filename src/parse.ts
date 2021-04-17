@@ -1,9 +1,9 @@
 import {ParseOpts} from "@/types";
 
 import {isDigit, isSpace} from "./string";
-import {byteSuffix, DecimalUnit} from "./unit";
+import {byteSuffix, DecimalPrefix} from "./unit";
 
-const unitPrefixes = Object.values(DecimalUnit).join("").toUpperCase();
+const unitPrefixes = Object.values(DecimalPrefix).join("").toUpperCase();
 
 export class Parser {
     private decimal = ".";
@@ -40,7 +40,7 @@ export class Parser {
         }
     }
 
-    public parse(): number | null {
+    public parseString(): number | null {
         const value = this.scanNumber();
         if (value === null) {
             return null;
@@ -123,6 +123,6 @@ export class Parser {
     }
 }
 
-export function parse(text: string, opts?: ParseOpts): number | null {
-    return new Parser(text, opts).parse();
+export function parseString(text: string, opts?: ParseOpts): number | null {
+    return new Parser(text, opts).parseString();
 }

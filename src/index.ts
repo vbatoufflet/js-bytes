@@ -1,7 +1,7 @@
 import {FormatOpts, ParseOpts} from "@/types";
 
 import {format} from "./format";
-import {parse} from "./parse";
+import {parseString} from "./parse";
 
 export class Bytes {
     protected bytesObject: boolean;
@@ -18,7 +18,7 @@ export class Bytes {
     }
 
     public static fromString(text: string, opts?: ParseOpts): Bytes {
-        return new Bytes(parse(text, opts) as number);
+        return new Bytes(parseString(text, opts) as number);
     }
 
     public isValid(): boolean {

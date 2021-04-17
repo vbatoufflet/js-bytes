@@ -1,4 +1,4 @@
-export enum BinaryUnit {
+export enum BinaryPrefix {
     KIBI = "Ki",
     MEBI = "Mi",
     GIBI = "Gi",
@@ -6,7 +6,7 @@ export enum BinaryUnit {
     PEBI = "Pi",
 }
 
-export enum DecimalUnit {
+export enum DecimalPrefix {
     KILO = "k",
     MEGA = "M",
     GIGA = "G",

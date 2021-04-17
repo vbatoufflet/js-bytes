@@ -1,26 +1,26 @@
 import {FormatOpts} from "@/types";
 
-import {BinaryUnit, byteSuffix, DecimalUnit} from "./unit";
+import {BinaryPrefix, byteSuffix, DecimalPrefix} from "./unit";
 
-interface UnitRef<T = BinaryUnit | DecimalUnit> {
-    text: T;
+interface Unit<T = BinaryPrefix | DecimalPrefix> {
+    prefix: T;
     value: number;
 }
 
-export const binaryUnits: UnitRef<BinaryUnit>[] = [
-    {text: BinaryUnit.PEBI, value: Math.pow(1024, 5)},
-    {text: BinaryUnit.TEBI, value: Math.pow(1024, 4)},
-    {text: BinaryUnit.GIBI, value: Math.pow(1024, 3)},
-    {text: BinaryUnit.MEBI, value: Math.pow(1024, 2)},
-    {text: BinaryUnit.KIBI, value: 1024},
+export const binaryUnits: Unit<BinaryPrefix>[] = [
+    {prefix: BinaryPrefix.PEBI, value: Math.pow(1024, 5)},
+    {prefix: BinaryPrefix.TEBI, value: Math.pow(1024, 4)},
+    {prefix: BinaryPrefix.GIBI, value: Math.pow(1024, 3)},
+    {prefix: BinaryPrefix.MEBI, value: Math.pow(1024, 2)},
+    {prefix: BinaryPrefix.KIBI, value: 1024},
 ];
 
-export const decimalUnits: UnitRef<DecimalUnit>[] = [
-    {text: DecimalUnit.PETA, value: 1e15},
-    {text: DecimalUnit.TERA, value: 1e12},
-    {text: DecimalUnit.GIGA, value: 1e9},
-    {text: DecimalUnit.MEGA, value: 1e6},
-    {text: DecimalUnit.KILO, value: 1e3},
+export const decimalUnits: Unit<DecimalPrefix>[] = [
+    {prefix: DecimalPrefix.PETA, value: 1e15},
+    {prefix: DecimalPrefix.TERA, value: 1e12},
+    {prefix: DecimalPrefix.GIGA, value: 1e9},
+    {prefix: DecimalPrefix.MEGA, value: 1e6},
+    {prefix: DecimalPrefix.KILO, value: 1e3},
 ];
 
 const formatDefaults: FormatOpts = {
@@ -45,7 +45,7 @@ export function format(value: number | null, opts: FormatOpts): string {
         // Always use decimal units to choose the one that will format the value, thus preferring
         // "0.98 KiB" over "1000 B".
         if (Math.abs(value / decimalUnits[idx].value) >= 1) {
-            return formatValue(value / units[idx].value, units[idx].text, opts);
+            return formatValue(value / units[idx].value, units[idx].prefix, opts);
         }
     }
 
