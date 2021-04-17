@@ -29,7 +29,7 @@ export class Bytes {
         return Boolean(obj.bytesObject);
     }
 
-    public toBinary(opts: FormatOpts<FormatBinaryUnit>): string {
+    public toBinary(opts?: FormatOpts<FormatBinaryUnit>): string {
         return format(this.value, {...opts, base: 2});
     }
 
@@ -37,11 +37,11 @@ export class Bytes {
         return Math.round(this.value);
     }
 
-    public toDecimal(opts: FormatOpts<FormatDecimalUnit>): string {
+    public toDecimal(opts?: FormatOpts<FormatDecimalUnit>): string {
         return format(this.value, {...opts, base: 10});
     }
 
-    public toString(opts: FormatOpts): string {
-        return format(this.value, opts);
+    public toString(opts?: FormatOpts): string {
+        return format(this.value, opts ?? {});
     }
 }

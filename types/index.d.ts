@@ -28,7 +28,7 @@ export declare class Bytes {
      * Returns a string representation of the Bytes object using binary (i.e. IEC) units.
      * @param opts - formatting options
      */
-    public toBinary(opts: FormatOpts<FormatBinaryUnit>): string;
+    public toBinary(opts?: FormatOpts<FormatBinaryUnit>): string;
 
     /**
      * Returns the current bytes value.
@@ -39,14 +39,14 @@ export declare class Bytes {
      * Returns a string representation of the Bytes object using decimal (i.e. SI) units.
      * @param opts - formatting options
      */
-    public toDecimal(opts: FormatOpts<FormatDecimalUnit>): string;
+    public toDecimal(opts?: FormatOpts<FormatDecimalUnit>): string;
 
     /**
      * Returns a string representation of the Bytes object according to provided formatting
      * options.
      * @param opts - formatting options
      */
-    public toString(opts: FormatOpts): string;
+    public toString(opts?: FormatOpts): string;
 }
 
 /** Formatting options */
