@@ -6,10 +6,10 @@ import {parseString} from "./parse";
 export class Bytes {
     protected bytesObject: boolean;
 
-    private value: number | null;
+    private value: number;
 
-    private constructor(value: number | null) {
-        this.value = value === null || isNaN(value) ? null : value;
+    private constructor(value: number) {
+        this.value = value;
         this.bytesObject = true;
     }
 
@@ -22,7 +22,7 @@ export class Bytes {
     }
 
     public isValid(): boolean {
-        return this.value !== null;
+        return !isNaN(this.value);
     }
 
     public static isBytes(obj: Record<string, unknown>): boolean {

@@ -44,10 +44,10 @@ export class Parser {
         }
     }
 
-    public parseString(): number | null {
+    public parseString(): number {
         const value = this.scanNumber();
-        if (value === null) {
-            return null;
+        if (isNaN(value)) {
+            return NaN;
         }
 
         if (isSpace(this.peek())) {
@@ -61,7 +61,7 @@ export class Parser {
 
         const idx = c === "k" ? 0 : unitPrefixes.indexOf(c);
         if (idx === -1) {
-            return null;
+            return NaN;
         }
 
         const binary = this.peek() === "i";
@@ -70,7 +70,7 @@ export class Parser {
         }
 
         if (this.text.length > 1 || (this.text.length === 1 && this.read() !== byteSuffix)) {
-            return null;
+            return NaN;
         }
 
         return value * Math.pow(binary ? 1024 : 1000, idx + 1);
@@ -86,7 +86,7 @@ export class Parser {
         return c;
     }
 
-    private scanNumber(): number | null {
+    private scanNumber(): number {
         let c: string;
         let s = "";
         let decimal = false;
@@ -104,7 +104,8 @@ export class Parser {
                 s += c;
             } else if (c === this.decimal) {
                 if (decimal) {
-                    return null;
+                    this.unread(c);
+                    break;
                 }
 
                 decimal = true;
@@ -117,9 +118,7 @@ export class Parser {
             }
         }
 
-        const v = Number.parseFloat(s);
-
-        return !isNaN(v) ? v : null;
+        return Number.parseFloat(s);
     }
 
     private unread(c: string): void {
@@ -127,6 +126,6 @@ export class Parser {
     }
 }
 
-export function parseString(text: string, opts?: ParseOpts): number | null {
+export function parseString(text: string, opts?: ParseOpts): number {
     return new Parser(text, opts).parseString();
 }

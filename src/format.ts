@@ -9,8 +9,8 @@ const formatDefaults: FormatOpts = {
     suffix: true,
 };
 
-export function format(value: number | null, opts: FormatOpts): string {
-    if (value === null) {
+export function format(value: number, opts: FormatOpts): string {
+    if (isNaN(value)) {
         return "Invalid Bytes";
     } else if (value === 0) {
         return "0";
