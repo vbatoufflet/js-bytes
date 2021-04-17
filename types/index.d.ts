@@ -87,6 +87,11 @@ export declare interface FormatOpts<T = FormatUnit> {
      * the current bytes value when omitted.
      */
     unit?: T;
+
+    /**
+     * Minimum width for the formatted string, padding with spaces if necessary.
+     */
+    width?: number;
 }
 
 /** Formatting unit */

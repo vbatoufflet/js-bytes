@@ -57,5 +57,5 @@ function formatValue(value: number, unit: string | null, opts: FormatOpts): stri
         s += byteSuffix;
     }
 
-    return s;
+    return opts.width ? s.padStart(opts.width) : s;
 }
