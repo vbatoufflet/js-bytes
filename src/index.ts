@@ -1,4 +1,4 @@
-import {FormatOpts, ParseOpts} from "@/types";
+import {FormatBinaryUnit, FormatDecimalUnit, FormatOpts, ParseOpts} from "@/types";
 
 import {format} from "./format";
 import {parseString} from "./parse";
@@ -29,7 +29,7 @@ export class Bytes {
         return Boolean(obj.bytesObject);
     }
 
-    public toBinary(opts: FormatOpts): string {
+    public toBinary(opts: FormatOpts<FormatBinaryUnit>): string {
         return format(this.value, {...opts, base: 2});
     }
 
@@ -37,7 +37,7 @@ export class Bytes {
         return this.value !== null ? Math.round(this.value) : NaN;
     }
 
-    public toDecimal(opts: FormatOpts): string {
+    public toDecimal(opts: FormatOpts<FormatDecimalUnit>): string {
         return format(this.value, {...opts, base: 10});
     }
 

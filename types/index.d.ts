@@ -28,7 +28,7 @@ export declare class Bytes {
      * Returns a string representation of the Bytes object using binary (i.e. IEC) units.
      * @param opts - formatting options
      */
-    public toBinary(opts: FormatOpts): string;
+    public toBinary(opts: FormatOpts<FormatBinaryUnit>): string;
 
     /**
      * Returns the current bytes value.
@@ -39,7 +39,7 @@ export declare class Bytes {
      * Returns a string representation of the Bytes object using decimal (i.e. SI) units.
      * @param opts - formatting options
      */
-    public toDecimal(opts: FormatOpts): string;
+    public toDecimal(opts: FormatOpts<FormatDecimalUnit>): string;
 
     /**
      * Returns a string representation of the Bytes object according to provided formatting
@@ -50,7 +50,7 @@ export declare class Bytes {
 }
 
 /** Formatting options */
-export declare interface FormatOpts {
+export declare interface FormatOpts<T = FormatUnit> {
     /**
      * Base to use for number formatting: `2` for binary mode (IEC) or `10` for decimal mode (SI).
      */
@@ -81,7 +81,34 @@ export declare interface FormatOpts {
      * Append the bytes suffix to the formatted string, with default to `true`.
      */
     suffix?: boolean;
+
+    /**
+     * Unit to format the bytes value to. It will automatically selects the one that best matches
+     * the current bytes value when omitted.
+     */
+    unit?: T;
 }
+
+/** Formatting unit */
+export declare type FormatUnit = FormatBinaryUnit | FormatDecimalUnit;
+
+/** Formatting binary unit */
+export declare type FormatBinaryUnit =
+    | "byte"
+    | "kibibyte"
+    | "mebibyte"
+    | "gibibyte"
+    | "tebibyte"
+    | "pebibyte";
+
+/** Formatting decimal unit */
+export declare type FormatDecimalUnit =
+    | "byte"
+    | "kilobyte"
+    | "megabyte"
+    | "gigabyte"
+    | "terabyte"
+    | "petabyte";
 
 /** Parsing options */
 export declare interface ParseOpts {

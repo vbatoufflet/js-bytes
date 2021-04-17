@@ -2,7 +2,7 @@ import {assert} from "chai";
 import {it} from "mocha";
 
 import {Bytes} from "@/src";
-import {FormatOpts, ParseOpts} from "@/types";
+import {FormatBinaryUnit, FormatDecimalUnit, FormatOpts, ParseOpts} from "@/types";
 
 const testData: {
     input: string;
@@ -297,6 +297,30 @@ const testData: {
             suffix: false,
         },
     },
+    {
+        input: "1.12 MB",
+        expected: {
+            binary: ["1094\xa0KiB", "1093.8\xa0KiB", "1093.75\xa0KiB"],
+            bytes: 1.12e6,
+            decimal: [],
+            valid: true,
+        },
+        format: {
+            unit: "kibibyte",
+        },
+    },
+    {
+        input: "1.12 MiB",
+        expected: {
+            binary: [],
+            bytes: 1.174405e6,
+            decimal: ["1174\xa0kB", "1174.4\xa0kB", "1174.41\xa0kB"],
+            valid: true,
+        },
+        format: {
+            unit: "kilobyte",
+        },
+    },
 
     // Intl:
     {
@@ -379,11 +403,17 @@ describe("Bytes", () =>
 
         data.expected.binary.forEach((v, digits) =>
             it(`${data.input}: toBinary[digits=${digits}]`, () =>
-                assert.equal(b.toBinary({...data.format, digits}), v)),
+                assert.equal(
+                    b.toBinary({...data.format, digits} as FormatOpts<FormatBinaryUnit>),
+                    v,
+                )),
         );
 
         data.expected.decimal.forEach((v, digits) =>
             it(`${data.input}: toDecimal[digits=${digits}]`, () =>
-                assert.equal(b.toDecimal({...data.format, digits}), v)),
+                assert.equal(
+                    b.toDecimal({...data.format, digits} as FormatOpts<FormatDecimalUnit>),
+                    v,
+                )),
         );
     }));

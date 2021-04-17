@@ -1,9 +1,13 @@
 import {ParseOpts} from "@/types";
 
 import {isDigit, isSpace} from "./string";
-import {byteSuffix, DecimalPrefix} from "./unit";
+import {byteSuffix, decimalUnits} from "./unit";
 
-const unitPrefixes = Object.values(DecimalPrefix).join("").toUpperCase();
+const unitPrefixes = decimalUnits
+    .map(a => a.prefix)
+    .reverse()
+    .join("")
+    .toUpperCase();
 
 export class Parser {
     private decimal = ".";

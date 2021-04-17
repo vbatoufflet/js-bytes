@@ -1,27 +1,6 @@
 import {FormatOpts} from "@/types";
 
-import {BinaryPrefix, byteSuffix, DecimalPrefix} from "./unit";
-
-interface Unit<T = BinaryPrefix | DecimalPrefix> {
-    prefix: T;
-    value: number;
-}
-
-export const binaryUnits: Unit<BinaryPrefix>[] = [
-    {prefix: BinaryPrefix.PEBI, value: Math.pow(1024, 5)},
-    {prefix: BinaryPrefix.TEBI, value: Math.pow(1024, 4)},
-    {prefix: BinaryPrefix.GIBI, value: Math.pow(1024, 3)},
-    {prefix: BinaryPrefix.MEBI, value: Math.pow(1024, 2)},
-    {prefix: BinaryPrefix.KIBI, value: 1024},
-];
-
-export const decimalUnits: Unit<DecimalPrefix>[] = [
-    {prefix: DecimalPrefix.PETA, value: 1e15},
-    {prefix: DecimalPrefix.TERA, value: 1e12},
-    {prefix: DecimalPrefix.GIGA, value: 1e9},
-    {prefix: DecimalPrefix.MEGA, value: 1e6},
-    {prefix: DecimalPrefix.KILO, value: 1e3},
-];
+import {binaryUnits, byteSuffix, decimalUnits} from "./unit";
 
 const formatDefaults: FormatOpts = {
     base: 2,
@@ -41,12 +20,14 @@ export function format(value: number | null, opts: FormatOpts): string {
 
     const units = opts.base === 2 ? binaryUnits : decimalUnits;
 
-    for (const idx in units) {
-        // Always use decimal units to choose the one that will format the value, thus preferring
-        // "0.98 KiB" over "1000 B".
-        if (Math.abs(value / decimalUnits[idx].value) >= 1) {
-            return formatValue(value / units[idx].value, units[idx].prefix, opts);
-        }
+    // Always use decimal units to choose the one that will format the value, thus preferring
+    // "0.98 KiB" over "1000 B".
+    const idx = opts.unit
+        ? units.findIndex(a => a.format === opts.unit)
+        : decimalUnits.findIndex(a => Math.abs(value / a.value) >= 1);
+
+    if (idx !== -1) {
+        return formatValue(value / units[idx].value, units[idx].prefix, opts);
     }
 
     return formatValue(value, null, opts);
