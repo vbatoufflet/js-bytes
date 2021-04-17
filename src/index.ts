@@ -34,7 +34,7 @@ export class Bytes {
     }
 
     public toBytes(): number {
-        return this.value !== null ? Math.round(this.value) : NaN;
+        return Math.round(this.value);
     }
 
     public toDecimal(opts: FormatOpts<FormatDecimalUnit>): string {

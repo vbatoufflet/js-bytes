@@ -18,18 +18,18 @@ const testData: {
     {
         input: "0 B",
         expected: {
-            binary: ["0", "0", "0"],
+            binary: ["0\xa0B", "0\xa0B", "0\xa0B"],
             bytes: 0,
-            decimal: ["0", "0", "0"],
+            decimal: ["0\xa0B", "0\xa0B", "0\xa0B"],
             valid: true,
         },
     },
     {
         input: "0 KiB",
         expected: {
-            binary: ["0", "0", "0"],
+            binary: ["0\xa0B", "0\xa0B", "0\xa0B"],
             bytes: 0,
-            decimal: ["0", "0", "0"],
+            decimal: ["0\xa0B", "0\xa0B", "0\xa0B"],
             valid: true,
         },
     },
@@ -45,18 +45,18 @@ const testData: {
     {
         input: "0.1 KiB",
         expected: {
-            binary: ["102\xa0B", "102.4\xa0B", "102.4\xa0B"],
+            binary: ["102\xa0B", "102\xa0B", "102\xa0B"],
             bytes: 102,
-            decimal: ["102\xa0B", "102.4\xa0B", "102.4\xa0B"],
+            decimal: ["102\xa0B", "102\xa0B", "102\xa0B"],
             valid: true,
         },
     },
     {
         input: "0.1 B",
         expected: {
-            binary: ["0\xa0B", "0.1\xa0B", "0.1\xa0B"],
+            binary: ["0\xa0B", "0\xa0B", "0\xa0B"],
             bytes: 0,
-            decimal: ["0\xa0B", "0.1\xa0B", "0.1\xa0B"],
+            decimal: ["0\xa0B", "0\xa0B", "0\xa0B"],
             valid: true,
         },
     },
@@ -144,9 +144,9 @@ const testData: {
     {
         input: "1.12 B",
         expected: {
-            binary: ["1\xa0B", "1.1\xa0B", "1.12\xa0B"],
+            binary: ["1\xa0B", "1\xa0B", "1\xa0B"],
             bytes: 1,
-            decimal: ["1\xa0B", "1.1\xa0B", "1.12\xa0B"],
+            decimal: ["1\xa0B", "1\xa0B", "1\xa0B"],
             valid: true,
         },
     },

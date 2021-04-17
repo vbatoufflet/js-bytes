@@ -12,8 +12,6 @@ const formatDefaults: FormatOpts = {
 export function format(value: number, opts: FormatOpts): string {
     if (isNaN(value)) {
         return "Invalid Bytes";
-    } else if (value === 0) {
-        return "0";
     }
 
     opts = Object.assign({}, formatDefaults, opts);
@@ -22,15 +20,17 @@ export function format(value: number, opts: FormatOpts): string {
 
     // Always use decimal units to choose the one that will format the value, thus preferring
     // "0.98 KiB" over "1000 B".
-    const idx = opts.unit
-        ? units.findIndex(a => a.format === opts.unit)
-        : decimalUnits.findIndex(a => Math.abs(value / a.value) >= 1);
+    if (opts.unit !== "byte") {
+        const idx = opts.unit
+            ? units.findIndex(a => a.format === opts.unit)
+            : decimalUnits.findIndex(a => Math.abs(value / a.value) >= 1);
 
-    if (idx !== -1) {
-        return formatValue(value / units[idx].value, units[idx].prefix, opts);
+        if (idx !== -1) {
+            return formatValue(value / units[idx].value, units[idx].prefix, opts);
+        }
     }
 
-    return formatValue(value, null, opts);
+    return formatValue(Math.round(value), null, opts);
 }
 
 function formatValue(value: number, unit: string | null, opts: FormatOpts): string {

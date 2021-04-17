@@ -1,11 +1,10 @@
 import {ParseOpts} from "@/types";
 
 import {isDigit, isSpace} from "./string";
-import {byteSuffix, decimalUnits} from "./unit";
+import {binaryUnits, byteSuffix, decimalUnits} from "./unit";
 
 const unitPrefixes = decimalUnits
     .map(a => a.prefix)
-    .reverse()
     .join("")
     .toUpperCase();
 
@@ -59,7 +58,7 @@ export class Parser {
             return value;
         }
 
-        const idx = c === "k" ? 0 : unitPrefixes.indexOf(c);
+        const idx = c === "k" ? unitPrefixes.length - 1 : unitPrefixes.indexOf(c);
         if (idx === -1) {
             return NaN;
         }
@@ -73,7 +72,7 @@ export class Parser {
             return NaN;
         }
 
-        return value * Math.pow(binary ? 1024 : 1000, idx + 1);
+        return value * (binary ? binaryUnits : decimalUnits)[idx].value;
     }
 
     private peek(): string {
@@ -89,7 +88,6 @@ export class Parser {
     private scanNumber(): number {
         let c: string;
         let s = "";
-        let decimal = false;
 
         for (;;) {
             c = this.read();
@@ -103,12 +101,11 @@ export class Parser {
             } else if (this.numerals === null && isDigit(c)) {
                 s += c;
             } else if (c === this.decimal) {
-                if (decimal) {
+                if (s.includes(".")) {
                     this.unread(c);
                     break;
                 }
 
-                decimal = true;
                 s += ".";
             } else if (c === this.group || (isSpace(c) && isSpace(this.group))) {
                 continue;

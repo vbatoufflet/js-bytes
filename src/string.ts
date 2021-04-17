@@ -23,5 +23,5 @@ const spaces = [
 ].join("");
 
 export function isSpace(c: string): boolean {
-    return spaces.includes(c);
+    return c !== "" && spaces.includes(c);
 }
