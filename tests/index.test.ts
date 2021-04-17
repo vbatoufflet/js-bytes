@@ -1,8 +1,8 @@
 import {assert} from "chai";
 import {it} from "mocha";
 
-import {Bytes} from "../src";
-import {FormatOpts, ParseOpts} from "../types";
+import {Bytes} from "@/src";
+import {FormatOpts, ParseOpts} from "@/types";
 
 const testData: {
     input: string;

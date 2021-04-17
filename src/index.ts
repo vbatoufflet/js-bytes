@@ -1,4 +1,5 @@
-import {FormatOpts, ParseOpts} from "../types";
+import {FormatOpts, ParseOpts} from "@/types";
+
 import {format} from "./format";
 import {parse} from "./parse";
 

@@ -1,4 +1,5 @@
-import {ParseOpts} from "../types";
+import {ParseOpts} from "@/types";
+
 import {isDigit, isSpace} from "./string";
 import {byteSuffix, DecimalUnit} from "./unit";
 

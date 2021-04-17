@@ -29,7 +29,7 @@
         "docs": "typedoc types/index.d.ts",
         "lint": "eslint .",
         "release": "npm run --production build && npm publish",
-        "test": "ts-mocha tests/*.test.ts"
+        "test": "ts-mocha --paths tests/*.test.ts"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^18.0.0",

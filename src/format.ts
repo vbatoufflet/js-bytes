@@ -1,4 +1,5 @@
-import {FormatOpts} from "../types";
+import {FormatOpts} from "@/types";
+
 import {BinaryUnit, byteSuffix, DecimalUnit} from "./unit";
 
 interface UnitRef<T = BinaryUnit | DecimalUnit> {

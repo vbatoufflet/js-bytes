@@ -1,11 +1,17 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
         "esModuleInterop": true,
         "lib": [
             "esnext"
         ],
         "module": "commonjs",
         "moduleResolution": "node",
+        "paths": {
+            "@/*": [
+                "./*"
+            ]
+        },
         "strict": true,
         "target": "esnext",
         "types": [
@@ -18,6 +24,7 @@
     ],
     "include": [
         "src/**/*.ts",
+        "tests/**/*.ts",
         "types/**/*.d.ts"
     ]
 }
