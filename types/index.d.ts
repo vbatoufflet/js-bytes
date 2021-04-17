@@ -99,21 +99,21 @@ export declare type FormatUnit = FormatBinaryUnit | FormatDecimalUnit;
 
 /** Formatting binary unit */
 export declare type FormatBinaryUnit =
-    | "byte"
-    | "kibibyte"
-    | "mebibyte"
-    | "gibibyte"
-    | "tebibyte"
-    | "pebibyte";
+    | "bytes"
+    | "kibibytes"
+    | "mebibytes"
+    | "gibibytes"
+    | "tebibytes"
+    | "pebibytes";
 
 /** Formatting decimal unit */
 export declare type FormatDecimalUnit =
-    | "byte"
-    | "kilobyte"
-    | "megabyte"
-    | "gigabyte"
-    | "terabyte"
-    | "petabyte";
+    | "bytes"
+    | "kilobytes"
+    | "megabytes"
+    | "gigabytes"
+    | "terabytes"
+    | "petabytes";
 
 /** Parsing options */
 export declare interface ParseOpts {

@@ -306,7 +306,7 @@ const testData: {
             valid: true,
         },
         format: {
-            unit: "kibibyte",
+            unit: "kibibytes",
         },
     },
     {
@@ -318,7 +318,7 @@ const testData: {
             valid: true,
         },
         format: {
-            unit: "kilobyte",
+            unit: "kilobytes",
         },
     },
 

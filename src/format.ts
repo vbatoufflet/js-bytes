@@ -20,7 +20,7 @@ export function format(value: number, opts: FormatOpts): string {
 
     // Always use decimal units to choose the one that will format the value, thus preferring
     // "0.98 KiB" over "1000 B".
-    if (opts.unit !== "byte") {
+    if (opts.unit !== "bytes") {
         const idx = opts.unit
             ? units.findIndex(a => a.format === opts.unit)
             : decimalUnits.findIndex(a => Math.abs(value / a.value) >= 1);
