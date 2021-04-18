@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@batou.dev/bytes - v0.2.0 | @batou.dev/bytes - v0.2.0</title>
-	<meta name="description" content="Documentation for @batou.dev/bytes - v0.2.0">
+	<title>@batou.dev/bytes - v0.3.0 | @batou.dev/bytes - v0.3.0</title>
+	<meta name="description" content="Documentation for @batou.dev/bytes - v0.3.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
   --color-background: #fdfdfd;
@@ -2697,7 +2697,7 @@ img {
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="index.html">@batou.dev/bytes - v0.2.0</a></strong>
+					<strong><a href="index.html">@batou.dev/bytes - v0.3.0</a></strong>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -2730,11 +2730,20 @@ img {
 		<li class=" tsd-kind-class">
 			<a href="classes/bytes.html" class="tsd-kind-icon">Bytes</a>
 		</li>
-		<li class=" tsd-kind-interface">
+		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="interfaces/formatopts.html" class="tsd-kind-icon">Format<wbr>Opts</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="interfaces/parseopts.html" class="tsd-kind-icon">Parse<wbr>Opts</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="modules.html#formatbinaryunit" class="tsd-kind-icon">Format<wbr>Binary<wbr>Unit</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="modules.html#formatdecimalunit" class="tsd-kind-icon">Format<wbr>Decimal<wbr>Unit</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="modules.html#formatunit" class="tsd-kind-icon">Format<wbr>Unit</a>
 		</li>
 	</ul>
 </nav>
@@ -2746,11 +2755,13 @@ img {
 			</a>
 			<p>Bytes is a library to parse and format byte sizes in JavaScript with native
 			Intl support.</p>
-			<pre><code class="language-typescript"><span style="color: #F8F8F2">Bytes.</span><span style="color: #A6E22E">fromBytes</span><span style="color: #F8F8F2">(</span><span style="color: #AE81FF">1024</span><span style="color: #F8F8F2">).</span><span style="color: #A6E22E">toString</span><span style="color: #F8F8F2">() </span><span style="color: #88846F">// = 1 KiB</span>
+			<pre><code class="language-typescript">Bytes.fromBytes(1024).toString() // = 1 KiB
 
-<span style="color: #F8F8F2">Bytes.</span><span style="color: #A6E22E">fromString</span><span style="color: #F8F8F2">(</span><span style="color: #E6DB74">&quot;1234.56 GiB&quot;</span><span style="color: #F8F8F2">).</span><span style="color: #A6E22E">toBytes</span><span style="color: #F8F8F2">() </span><span style="color: #88846F">// = 1325598706237</span>
+Bytes.fromString(&quot;1234.56 GiB&quot;).toBytes() // = 1325598706237
 
-<span style="color: #F8F8F2">Bytes.</span><span style="color: #A6E22E">fromString</span><span style="color: #F8F8F2">(</span><span style="color: #E6DB74">&quot;1,234.56 GiB&quot;</span><span style="color: #F8F8F2">, {locale: </span><span style="color: #E6DB74">&quot;en&quot;</span><span style="color: #F8F8F2">}).</span><span style="color: #A6E22E">toDecimal</span><span style="color: #F8F8F2">({locale: </span><span style="color: #E6DB74">&quot;fr&quot;</span><span style="color: #F8F8F2">}) </span><span style="color: #88846F">// = 1,33 TB</span>
+Bytes.fromString(&quot;1,234.56 GiB&quot;, {locale: &quot;en&quot;}).toDecimal({locale: &quot;fr&quot;}) // = 1,33 TB
+
+Bytes.fromString(&quot;1234.56kB&quot;).toFormat(&quot;%.3m&quot;) // = 1.235 MB
 </code></pre>
 			<a href="#note" id="note" style="color: inherit; text-decoration: none;">
 				<h2>Note</h2>
@@ -2784,10 +2795,66 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Interfaces</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-interface"><a href="interfaces/formatopts.html" class="tsd-kind-icon">Format<wbr>Opts</a></li>
+							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/formatopts.html" class="tsd-kind-icon">Format<wbr>Opts</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/parseopts.html" class="tsd-kind-icon">Parse<wbr>Opts</a></li>
 						</ul>
 					</section>
+					<section class="tsd-index-section ">
+						<h3>Type aliases</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-type-alias"><a href="modules.html#formatbinaryunit" class="tsd-kind-icon">Format<wbr>Binary<wbr>Unit</a></li>
+							<li class="tsd-kind-type-alias"><a href="modules.html#formatdecimalunit" class="tsd-kind-icon">Format<wbr>Decimal<wbr>Unit</a></li>
+							<li class="tsd-kind-type-alias"><a href="modules.html#formatunit" class="tsd-kind-icon">Format<wbr>Unit</a></li>
+						</ul>
+					</section>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Type aliases</h2>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+				<a name="formatbinaryunit" class="tsd-anchor"></a>
+				<h3>Format<wbr>Binary<wbr>Unit</h3>
+				<div class="tsd-signature tsd-kind-icon">Format<wbr>Binary<wbr>Unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;bytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;kibibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;mebibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;gibibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;tebibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;pebibytes&quot;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L147">index.d.ts:147</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Formatting binary unit</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+				<a name="formatdecimalunit" class="tsd-anchor"></a>
+				<h3>Format<wbr>Decimal<wbr>Unit</h3>
+				<div class="tsd-signature tsd-kind-icon">Format<wbr>Decimal<wbr>Unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;bytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;kilobytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;megabytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;gigabytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;terabytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;petabytes&quot;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L156">index.d.ts:156</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Formatting decimal unit</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+				<a name="formatunit" class="tsd-anchor"></a>
+				<h3>Format<wbr>Unit</h3>
+				<div class="tsd-signature tsd-kind-icon">Format<wbr>Unit<span class="tsd-signature-symbol">:</span> <a href="modules.html#formatbinaryunit" class="tsd-signature-type" data-tsd-kind="Type alias">FormatBinaryUnit</a><span class="tsd-signature-symbol"> | </span><a href="modules.html#formatdecimalunit" class="tsd-signature-type" data-tsd-kind="Type alias">FormatDecimalUnit</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L144">index.d.ts:144</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Formatting unit</p>
+					</div>
 				</div>
 			</section>
 		</section>

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FormatOpts | @batou.dev/bytes - v0.2.0</title>
-	<meta name="description" content="Documentation for @batou.dev/bytes - v0.2.0">
+	<title>FormatOpts | @batou.dev/bytes - v0.3.0</title>
+	<meta name="description" content="Documentation for @batou.dev/bytes - v0.3.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
   --color-background: #fdfdfd;
@@ -2697,7 +2697,7 @@ img {
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="../index.html">@batou.dev/bytes - v0.2.0</a></strong>
+					<strong><a href="../index.html">@batou.dev/bytes - v0.3.0</a></strong>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -2730,7 +2730,7 @@ img {
 		<li class=" tsd-kind-class">
 			<a href="../classes/bytes.html" class="tsd-kind-icon">Bytes</a>
 		</li>
-		<li class="current tsd-kind-interface">
+		<li class="current tsd-kind-interface tsd-has-type-parameter">
 			<a href="formatopts.html" class="tsd-kind-icon">Format<wbr>Opts</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -2743,15 +2743,33 @@ img {
 					<a href="formatopts.html#locale" class="tsd-kind-icon">locale</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="formatopts.html#sign" class="tsd-kind-icon">sign</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="formatopts.html#space" class="tsd-kind-icon">space</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="formatopts.html#suffix" class="tsd-kind-icon">suffix</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="formatopts.html#unit" class="tsd-kind-icon">unit</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="formatopts.html#width" class="tsd-kind-icon">width</a>
+				</li>
 			</ul>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="parseopts.html" class="tsd-kind-icon">Parse<wbr>Opts</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../modules.html#formatbinaryunit" class="tsd-kind-icon">Format<wbr>Binary<wbr>Unit</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../modules.html#formatdecimalunit" class="tsd-kind-icon">Format<wbr>Decimal<wbr>Unit</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../modules.html#formatunit" class="tsd-kind-icon">Format<wbr>Unit</a>
 		</li>
 	</ul>
 </nav>
@@ -2763,6 +2781,14 @@ img {
 					<p>Formatting options</p>
 				</div>
 			</div>
+		</section>
+		<section class="tsd-panel tsd-type-parameters">
+			<h3>Type parameters</h3>
+			<ul class="tsd-type-parameters">
+				<li>
+					<h4>T = <a href="../modules.html#formatunit" class="tsd-signature-type" data-tsd-kind="Type alias">FormatUnit</a></h4>
+				</li>
+			</ul>
 		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
@@ -2782,8 +2808,11 @@ img {
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#base" class="tsd-kind-icon">base</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#digits" class="tsd-kind-icon">digits</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#locale" class="tsd-kind-icon">locale</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#sign" class="tsd-kind-icon">sign</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#space" class="tsd-kind-icon">space</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#suffix" class="tsd-kind-icon">suffix</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#unit" class="tsd-kind-icon">unit</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="formatopts.html#width" class="tsd-kind-icon">width</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2797,13 +2826,12 @@ img {
 				<div class="tsd-signature tsd-kind-icon">base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">10</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/4166ae3/types/index.d.ts#L57">index.d.ts:57</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L103">index.d.ts:103</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Base to use for number formatting: <code>2</code> for binary mode (IEC) or <code>10</code>
-						for decimal mode (SI).</p>
+						<p>Base to use for number formatting: <code>2</code> for binary mode (IEC) or <code>10</code> for decimal mode (SI).</p>
 					</div>
 				</div>
 			</section>
@@ -2813,7 +2841,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">digits<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/4166ae3/types/index.d.ts#L62">index.d.ts:62</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L108">index.d.ts:108</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2828,13 +2856,28 @@ img {
 				<div class="tsd-signature tsd-kind-icon">locale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/4166ae3/types/index.d.ts#L68">index.d.ts:68</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L114">index.d.ts:114</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Format number according to a given locale. It uses the default locale
-						if set to <code>true</code>, and support is disabled when omitted.</p>
+						<p>Format number according to a given locale. It uses the default locale if set to <code>true</code>, and
+						support is disabled when omitted.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="sign" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> sign</h3>
+				<div class="tsd-signature tsd-kind-icon">sign<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L119">index.d.ts:119</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Always print the sign associated with the numeric bytes value.</p>
 					</div>
 				</div>
 			</section>
@@ -2844,7 +2887,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">space<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/4166ae3/types/index.d.ts#L73">index.d.ts:73</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L124">index.d.ts:124</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2859,12 +2902,43 @@ img {
 				<div class="tsd-signature tsd-kind-icon">suffix<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/4166ae3/types/index.d.ts#L78">index.d.ts:78</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L129">index.d.ts:129</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>Append the bytes suffix to the formatted string, with default to <code>true</code>.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="unit" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> unit</h3>
+				<div class="tsd-signature tsd-kind-icon">unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L135">index.d.ts:135</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Unit to format the bytes value to. It will automatically selects the one that best matches
+						the current bytes value when omitted.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="width" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> width</h3>
+				<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L140">index.d.ts:140</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Minimum width for the formatted string, padding with spaces if necessary.</p>
 					</div>
 				</div>
 			</section>
