@@ -25,8 +25,8 @@ export class Bytes {
         return !isNaN(this.value);
     }
 
-    public static isBytes(obj: Record<string, unknown>): boolean {
-        return Boolean(obj.bytesObject);
+    public static isBytes(obj: unknown): obj is Bytes {
+        return Boolean((obj as Bytes).bytesObject);
     }
 
     public toBinary(opts?: FormatOpts<FormatBinaryUnit>): string {

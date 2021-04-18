@@ -22,7 +22,7 @@ export declare class Bytes {
      * Return whether or not the given object is a Bytes one.
      * @param obj - object to inspect
      */
-    public static isBytes(obj: Record<string, unknown>): boolean;
+    public static isBytes(obj: unknown): obj is Bytes;
 
     /**
      * Returns a string representation of the Bytes object using binary (i.e. IEC) units.
