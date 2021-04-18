@@ -7,11 +7,11 @@ Intl support.
 ```typescript
 Bytes.fromBytes(1024).toString() // = 1 KiB
 
-Bytes.fromString("1234.56 GiB").toBytes() // = 1325598706237
-
 Bytes.fromString("1,234.56 GiB", {locale: "en"}).toDecimal({locale: "fr"}) // = 1,33 TB
 
 Bytes.fromString("1234.56kB").toFormat("%.3m") // = 1.235 MB
+
+Bytes.fromString("1234.56 GiB").valueOf() // = 1325598706237
 ```
 
 Note

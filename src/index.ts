@@ -33,10 +33,6 @@ export class Bytes {
         return format(this.value, {...opts, base: 2});
     }
 
-    public toBytes(): number {
-        return Math.round(this.value);
-    }
-
     public toDecimal(opts?: FormatOpts<FormatDecimalUnit>): string {
         return format(this.value, {...opts, base: 10});
     }
@@ -57,5 +53,9 @@ export class Bytes {
 
     public toString(opts?: FormatOpts): string {
         return format(this.value, opts ?? {});
+    }
+
+    public valueOf(): number {
+        return Math.round(this.value);
     }
 }

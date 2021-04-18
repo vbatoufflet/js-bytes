@@ -31,11 +31,6 @@ export declare class Bytes {
     public toBinary(opts?: FormatOpts<FormatBinaryUnit>): string;
 
     /**
-     * Returns the current bytes value.
-     */
-    public toBytes(): number;
-
-    /**
      * Returns a string representation of the Bytes object using decimal (i.e. SI) units.
      * @param opts - formatting options
      */
@@ -93,6 +88,11 @@ export declare class Bytes {
      * @param opts - formatting options
      */
     public toString(opts?: FormatOpts): string;
+
+    /**
+     * Returns the current bytes value.
+     */
+    public valueOf(): number;
 }
 
 /** Formatting options */
