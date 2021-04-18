@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.3.0 - (2021-04-18)
+--------------------
+
+* Add options to handle sign printing, output unit and printing width
+* Add support for printf-like formatting
+* Make formatting options parameters optional
+
 0.2.0 - (2021-04-16)
 --------------------
 
