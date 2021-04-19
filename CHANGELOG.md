@@ -1,6 +1,17 @@
 Changelog
 =========
 
+0.4.0 - (2021-04-19)
+--------------------
+
+* Add methods to add/subtract an amount of bytes to/from the current value
+* Add `%v` and `%V` verbs support to format specifier
+* Fix missing type guard on isBytes() method
+
+Breaking changes:
+
+* Rename toBytes() into valueOf() to use as primitive value
+
 0.3.0 - (2021-04-18)
 --------------------
 
