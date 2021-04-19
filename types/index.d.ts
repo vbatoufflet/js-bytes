@@ -43,16 +43,18 @@ export declare class Bytes {
      * Verbs:
      * ```
      * %b   bytes
-     * %k   kilobytes
-     * %m   megabytes
      * %g   gigabytes
-     * %t   terabytes
-     * %p   petabytes
-     * %K   kibibytes
-     * %M   mebibytes
      * %G   gibibytes
-     * %T   tebibytes
+     * %k   kilobytes
+     * %K   kibibytes
+     * %m   megabytes
+     * %M   mebibytes
+     * %p   petabytes
      * %P   pebibytes
+     * %t   terabytes
+     * %T   tebibytes
+     * %v   decimal unit that best matches to the value (SI)
+     * %V   binary unit that best matches to the value (IEC)
      * ```
      *
      * Width can be specified by a decimal number preceding the verb and the digits precision by

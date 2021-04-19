@@ -191,15 +191,19 @@ export class Parser {
             return opts;
         }
 
-        const idx = unitPrefixes.indexOf(c.toUpperCase());
-        if (idx === -1) {
-            throw SyntaxError(`unknown format verb: %${c}`);
+        if (c === "v" || c === "V") {
+            opts.base = c === "V" ? 2 : 10;
+        } else {
+            const idx = unitPrefixes.indexOf(c.toUpperCase());
+            if (idx === -1) {
+                throw SyntaxError(`unknown format verb: %${c}`);
+            }
+
+            const binary = c === c.toUpperCase();
+
+            opts.base = binary ? 2 : 10;
+            opts.unit = binary ? binaryUnits[idx].format : decimalUnits[idx].format;
         }
-
-        const binary = c === c.toUpperCase();
-
-        opts.base = binary ? 2 : 10;
-        opts.unit = binary ? binaryUnits[idx].format : decimalUnits[idx].format;
 
         return opts;
     }
