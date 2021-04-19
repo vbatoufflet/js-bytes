@@ -1,6 +1,12 @@
 /** A Bytes object represent an amount of bytes. */
 export declare class Bytes {
     /**
+     * Returns a copy of this Bytes object having the specified amount added to its value.
+     * @param bytes - value to add
+     */
+    public add(bytes: number | string | Bytes): Bytes;
+
+    /**
      * Create a new Bytes object from a numeric value.
      * @param value - bytes value
      */
@@ -23,6 +29,12 @@ export declare class Bytes {
      * @param obj - object to inspect
      */
     public static isBytes(obj: unknown): obj is Bytes;
+
+    /**
+     * Returns a copy of this Bytes object having the specified amount subtracted from its value.
+     * @param bytes - value to subtract
+     */
+    public subtract(bytes: number | string | Bytes): Bytes;
 
     /**
      * Returns a string representation of the Bytes object using binary (i.e. IEC) units.
