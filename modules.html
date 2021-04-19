@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@batou.dev/bytes - v0.3.0 | @batou.dev/bytes - v0.3.0</title>
-	<meta name="description" content="Documentation for @batou.dev/bytes - v0.3.0">
+	<title>@batou.dev/bytes - v0.4.0 | @batou.dev/bytes - v0.4.0</title>
+	<meta name="description" content="Documentation for @batou.dev/bytes - v0.4.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
   --color-background: #fdfdfd;
@@ -2697,7 +2697,7 @@ img {
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="index.html">@batou.dev/bytes - v0.3.0</a></strong>
+					<strong><a href="index.html">@batou.dev/bytes - v0.4.0</a></strong>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -2757,11 +2757,11 @@ img {
 			Intl support.</p>
 			<pre><code class="language-typescript">Bytes.fromBytes(1024).toString() // = 1 KiB
 
-Bytes.fromString(&quot;1234.56 GiB&quot;).toBytes() // = 1325598706237
-
 Bytes.fromString(&quot;1,234.56 GiB&quot;, {locale: &quot;en&quot;}).toDecimal({locale: &quot;fr&quot;}) // = 1,33 TB
 
 Bytes.fromString(&quot;1234.56kB&quot;).toFormat(&quot;%.3m&quot;) // = 1.235 MB
+
+Bytes.fromString(&quot;1234.56 GiB&quot;).valueOf() // = 1325598706237
 </code></pre>
 			<a href="#note" id="note" style="color: inherit; text-decoration: none;">
 				<h2>Note</h2>
@@ -2817,7 +2817,7 @@ Bytes.fromString(&quot;1234.56kB&quot;).toFormat(&quot;%.3m&quot;) // = 1.235 M
 				<div class="tsd-signature tsd-kind-icon">Format<wbr>Binary<wbr>Unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;bytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;kibibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;mebibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;gibibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;tebibytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;pebibytes&quot;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L147">index.d.ts:147</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/51002f8/types/index.d.ts#L161">index.d.ts:161</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2832,7 +2832,7 @@ Bytes.fromString(&quot;1234.56kB&quot;).toFormat(&quot;%.3m&quot;) // = 1.235 M
 				<div class="tsd-signature tsd-kind-icon">Format<wbr>Decimal<wbr>Unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;bytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;kilobytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;megabytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;gigabytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;terabytes&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;petabytes&quot;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L156">index.d.ts:156</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/51002f8/types/index.d.ts#L170">index.d.ts:170</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2847,7 +2847,7 @@ Bytes.fromString(&quot;1234.56kB&quot;).toFormat(&quot;%.3m&quot;) // = 1.235 M
 				<div class="tsd-signature tsd-kind-icon">Format<wbr>Unit<span class="tsd-signature-symbol">:</span> <a href="modules.html#formatbinaryunit" class="tsd-signature-type" data-tsd-kind="Type alias">FormatBinaryUnit</a><span class="tsd-signature-symbol"> | </span><a href="modules.html#formatdecimalunit" class="tsd-signature-type" data-tsd-kind="Type alias">FormatDecimalUnit</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/89aed8f/types/index.d.ts#L144">index.d.ts:144</a></li>
+						<li>Defined in <a href="https://github.com/vbatoufflet/js-bytes/blob/51002f8/types/index.d.ts#L158">index.d.ts:158</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
