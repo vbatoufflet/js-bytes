@@ -1,8 +1,8 @@
 Bytes
 =====
 
-Bytes is a library to parse and format byte sizes in JavaScript with native
-Intl support.
+Bytes is a library for working with byte sizes in JavaScript with native Intl
+support.
 
 ```js
 Bytes.fromBytes(1024).toString() // = 1 KiB
@@ -12,6 +12,8 @@ Bytes.fromString("1,234.56 GiB", {locale: "en"}).toDecimal({locale: "fr"}) // = 
 Bytes.fromString("1234.56kB").toFormat("%.3m") // = 1.235 MB
 
 Bytes.fromString("1234.56 GiB").valueOf() // = 1325598706237
+
+Bytes.fromString("123.45 MB").add("1.23 MiB").toBinary() // = 118.96 MiB
 ```
 
 Install
