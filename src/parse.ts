@@ -32,7 +32,7 @@ export class Parser {
             //
             // See: https://observablehq.com/@mbostock/localized-number-parsing
             const locale = opts.locale !== true ? opts.locale : undefined;
-            const parts = Intl.NumberFormat(locale).formatToParts(-1234.5);
+            const parts = Intl.NumberFormat(locale).formatToParts(-1234.5); // eslint-disable-line new-cap
 
             this.decimal = parts.find(a => a.type === "decimal")?.value ?? ".";
             this.group = parts.find(a => a.type === "group")?.value ?? "";
@@ -183,7 +183,7 @@ export class Parser {
         }
 
         if (c === "" || isSpace(c)) {
-            throw SyntaxError(`missing format verb: %${save.slice(0, this.pos - 1)}`);
+            throw new SyntaxError(`missing format verb: %${save.slice(0, this.pos - 1)}`);
         }
 
         if (c === "b") {
@@ -196,7 +196,7 @@ export class Parser {
         } else {
             const idx = unitPrefixes.indexOf(c.toUpperCase());
             if (idx === -1) {
-                throw SyntaxError(`unknown format verb: %${c}`);
+                throw new SyntaxError(`unknown format verb: %${c}`);
             }
 
             const binary = c === c.toUpperCase();

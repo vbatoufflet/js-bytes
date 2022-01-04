@@ -32,6 +32,7 @@
         "test": "ts-mocha --paths tests/*.test.ts"
     },
     "devDependencies": {
+        "@batou.dev/eslint-config-typescript": "^0.3.0",
         "@rollup/plugin-commonjs": "^21.0.1",
         "@types/chai": "^4.2.16",
         "@types/mocha": "^9.0.0",
