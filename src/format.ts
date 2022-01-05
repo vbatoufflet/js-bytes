@@ -1,4 +1,4 @@
-import {FormatOpts} from "@/types";
+import {FormatOpts, FormatUnit} from "@/types";
 
 import {binaryUnits, byteSuffix, decimalUnits} from "./unit";
 
@@ -39,6 +39,21 @@ export function format(value: number, opts: FormatOpts): string {
     }
 
     return formatValue(Math.round(value), null, opts);
+}
+
+export function formatAs(value: number, unit: FormatUnit): number {
+    if (!isNaN(value)) {
+        if (unit === "bytes") {
+            return Math.round(value);
+        }
+
+        const entry = [...binaryUnits, ...decimalUnits].find(a => a.format === unit);
+        if (entry) {
+            return value / entry.value;
+        }
+    }
+
+    return NaN;
 }
 
 function formatValue(value: number, unit: string | null, opts: FormatOpts): string {

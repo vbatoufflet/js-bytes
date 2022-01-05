@@ -7,6 +7,12 @@ export declare class Bytes {
     public add(bytes: number | string | Bytes): Bytes;
 
     /**
+     * Converts the current bytes value to a given unit.
+     * @param unit - byte unit
+     */
+    public as(unit: FormatUnit): number;
+
+    /**
      * Create a new Bytes object from a numeric value.
      * @param value - bytes value
      */

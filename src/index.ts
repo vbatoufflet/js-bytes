@@ -1,6 +1,6 @@
-import {FormatBinaryUnit, FormatDecimalUnit, FormatOpts, ParseOpts} from "@/types";
+import {FormatBinaryUnit, FormatDecimalUnit, FormatOpts, FormatUnit, ParseOpts} from "@/types";
 
-import {format} from "./format";
+import {format, formatAs} from "./format";
 import {parseFormat, parseString} from "./parse";
 
 export class Bytes {
@@ -15,6 +15,10 @@ export class Bytes {
 
     public add(bytes: number | string | Bytes): Bytes {
         return this.adaptValue(bytes, false);
+    }
+
+    public as(unit: FormatUnit): number {
+        return formatAs(this.value, unit);
     }
 
     public static fromBytes(value: number): Bytes {

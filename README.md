@@ -14,6 +14,8 @@ Bytes.fromString("1234.56kB").toFormat("%.3m") // = 1.235 MB
 Bytes.fromString("1234.56 GiB").valueOf() // = 1325598706237
 
 Bytes.fromString("123.45 MB").add("1.23 MiB").toBinary() // = 118.96 MiB
+
+Bytes.fromString("12.345 MiB").as("kilobytes") // = 12944.67072
 ```
 
 Install
