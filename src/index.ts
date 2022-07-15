@@ -34,7 +34,7 @@ export class Bytes {
     }
 
     public static isBytes(obj: unknown): obj is Bytes {
-        return Boolean((obj as Bytes).bytesObject);
+        return Boolean((obj as Bytes)?.bytesObject);
     }
 
     public subtract(bytes: number | string | Bytes): Bytes {
