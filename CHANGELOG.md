@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.5.1 - (2022-07-15)
+--------------------
+
+* Fix exception with null and undefined values in isBytes
+
 0.5.0 - (2022-01-05)
 --------------------
 
