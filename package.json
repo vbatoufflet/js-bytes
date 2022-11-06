@@ -25,7 +25,7 @@
         "LICENSE"
     ],
     "scripts": {
-        "build": "rollup --config rollup.config.js",
+        "build": "rollup --config rollup.config.mjs",
         "docs": "typedoc types/index.d.ts",
         "lint": "eslint .",
         "release": "npm run --production build && npm publish",
