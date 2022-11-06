@@ -44,7 +44,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-simple-import-sort": "^7.0.0",
         "prettier": "^2.1.2",
-        "rollup": "^3.2.5",
+        "rollup": "^2.79.1",
         "rollup-plugin-esbuild": "^4.0.1",
         "ts-mocha": "^10.0.0",
         "typedoc": "^0.23.20",
