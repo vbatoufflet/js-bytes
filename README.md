@@ -37,12 +37,6 @@ Node.js:
 const {Bytes} = require("@batou.dev/bytes");
 ```
 
-Note
-----
-
-⚠️ IMPORTANT: this library is at an early stage, thus breaking changes might
-still occur as its development evolves.
-
 Links
 -----
 
