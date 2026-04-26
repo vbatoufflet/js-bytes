@@ -20,7 +20,7 @@ export class Parser {
 
   private numerals: Map<string, string> | null = null;
 
-  private pos = -1;
+  private pos = 0;
 
   private text: string;
 
@@ -98,7 +98,8 @@ export class Parser {
       this.read();
     }
 
-    if (this.text.length > 1 || (this.text.length === 1 && this.read() !== byteSuffix)) {
+    const rest = this.text.length - this.pos;
+    if (rest > 1 || (rest === 1 && this.read() !== byteSuffix)) {
       return NaN;
     }
 
@@ -106,16 +107,11 @@ export class Parser {
   }
 
   private peek(): string {
-    return this.text.charAt(0);
+    return this.text.charAt(this.pos);
   }
 
   private read(): string {
-    const c = this.text.charAt(0);
-
-    this.pos++;
-    this.text = this.text.slice(1);
-
-    return c;
+    return this.text.charAt(this.pos++);
   }
 
   private scanNumber(decimal = true): number {
@@ -136,7 +132,7 @@ export class Parser {
         s += c;
       } else if (decimal && c === this.decimal) {
         if (hasDecimal) {
-          this.unread(c);
+          this.unread();
           break;
         }
 
@@ -145,7 +141,7 @@ export class Parser {
       } else if (c === this.group || (isSpace(c) && isSpace(this.group))) {
         continue;
       } else {
-        this.unread(c);
+        this.unread();
         break;
       }
     }
@@ -154,7 +150,7 @@ export class Parser {
   }
 
   private scanVerb(): FormatOpts {
-    const save = this.text;
+    const start = this.pos;
     const opts: FormatOpts = {};
 
     let c = this.read();
@@ -174,7 +170,7 @@ export class Parser {
     }
 
     if (isDigit(c)) {
-      this.unread(c);
+      this.unread();
       opts.width = this.scanNumber(false);
       c = this.read();
     }
@@ -185,7 +181,7 @@ export class Parser {
     }
 
     if (c === "" || isSpace(c)) {
-      throw new SyntaxError(`missing format verb: %${save.slice(0, this.pos - 1)}`);
+      throw new SyntaxError(`missing format verb: %${this.text.slice(start, this.pos - 1)}`);
     }
 
     if (c === "b") {
@@ -210,9 +206,8 @@ export class Parser {
     return opts;
   }
 
-  private unread(c: string): void {
+  private unread(): void {
     this.pos--;
-    this.text = c + this.text;
   }
 }
 
