@@ -48,7 +48,7 @@
     "docs": "typedoc",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:package": "bun scripts/test-package.mjs",
+    "test:package": "bun scripts/test-package.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
