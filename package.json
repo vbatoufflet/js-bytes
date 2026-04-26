@@ -47,7 +47,7 @@
   },
   "scripts": {
     "build": "vite build && tsc --project tsconfig.build.json",
-    "docs": "typedoc src/index.ts",
+    "docs": "typedoc",
     "lint": "eslint .",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
