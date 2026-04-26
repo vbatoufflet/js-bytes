@@ -65,7 +65,7 @@ export function format(value: number, opts: FormatOpts): string {
     return "Invalid Bytes";
   }
 
-  opts = Object.assign({}, formatDefaults, opts);
+  opts = { ...formatDefaults, ...opts };
 
   const units = opts.base === 2 ? binaryUnits : decimalUnits;
 
@@ -85,18 +85,16 @@ export function format(value: number, opts: FormatOpts): string {
 }
 
 export function formatAs(value: number, unit: FormatUnit): number {
-  if (!Number.isNaN(value)) {
-    if (unit === "bytes") {
-      return Math.round(value);
-    }
-
-    const entry = [...binaryUnits, ...decimalUnits].find(a => a.format === unit);
-    if (entry) {
-      return value / entry.value;
-    }
+  if (Number.isNaN(value)) {
+    return NaN;
   }
 
-  return NaN;
+  if (unit === "bytes") {
+    return Math.round(value);
+  }
+
+  const entry = [...binaryUnits, ...decimalUnits].find(a => a.format === unit);
+  return entry ? value / entry.value : NaN;
 }
 
 function formatValue(value: number, unit: null | string, opts: FormatOpts): string {
