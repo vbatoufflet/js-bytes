@@ -1,6 +1,6 @@
 import { resolve } from "node:path";
 
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   build: {
@@ -10,5 +10,9 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     target: "es2023",
+  },
+  test: {
+    environment: "node",
+    include: ["tests/**/*.test.ts"],
   },
 });

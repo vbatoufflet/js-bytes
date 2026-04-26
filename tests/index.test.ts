@@ -1,5 +1,4 @@
-import { assert } from "chai";
-import { it } from "mocha";
+import { assert, describe, it } from "vitest";
 
 import { Bytes, type FormatOpts, type FormatUnit, type ParseOpts } from "../src/index.js";
 

@@ -7,7 +7,7 @@
     "rootDir": ".",
     "strict": true,
     "target": "ES2023",
-    "types": ["chai", "mocha"],
+    "types": ["node"],
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.ts", "tests/**/*.ts"],
