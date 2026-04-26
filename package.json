@@ -44,6 +44,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "benchmark": "bun run build && bun scripts/benchmark.ts",
     "build": "vite build && tsc --project tsconfig.build.json",
     "docs": "typedoc",
     "lint": "eslint .",
@@ -59,6 +60,7 @@
     "@types/node": "^22.19.17",
     "eslint": "^10.2.1",
     "eslint-plugin-perfectionist": "^5.9.0",
+    "tinybench": "^6.0.0",
     "typedoc": "^0.28.19",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.0",
