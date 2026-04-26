@@ -24,8 +24,6 @@
     "url": "https://github.com/vbatoufflet/js-bytes/issues"
   },
   "homepage": "https://github.com/vbatoufflet/js-bytes#readme",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
