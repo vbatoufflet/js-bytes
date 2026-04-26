@@ -2,8 +2,8 @@
     "name": "@batou.dev/bytes",
     "version": "0.5.1",
     "description": "Work with byte sizes in JavaScript with native Intl support",
-    "author": "Vincent Batoufflet <vincent@batou.dev>",
     "license": "MIT",
+    "author": "Vincent Batoufflet <vincent@batou.dev>",
     "keywords": [
         "binary",
         "bytes",
@@ -34,6 +34,9 @@
         "types",
         "LICENSE"
     ],
+    "engines": {
+        "node": ">=22"
+    },
     "scripts": {
         "build": "rollup --config rollup.config.mjs",
         "docs": "typedoc types/index.d.ts",
