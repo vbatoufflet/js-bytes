@@ -7,6 +7,7 @@
       "devDependencies": {
         "@batou.dev/eslint-config": "^0.2.1",
         "@eslint/compat": "^2.0.5",
+        "@eslint/js": "^10.0.1",
         "@stylistic/eslint-plugin": "^5.10.0",
         "@types/node": "^22.19.17",
         "eslint": "^10.2.1",
