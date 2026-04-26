@@ -41,7 +41,7 @@ Links
 -----
 
 * [Documentation](https://js-bytes.batou.dev/)
-* [Changelog](https://github.com/vbatoufflet/js-bytes/blob/master/CHANGELOG.md)
+* [Changelog](https://github.com/vbatoufflet/js-bytes/blob/main/CHANGELOG.md)
 * [npm package](https://www.npmjs.com/package/@batou.dev/bytes)
 
 License
