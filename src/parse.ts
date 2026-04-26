@@ -120,6 +120,7 @@ export class Parser {
 
   private scanNumber(decimal = true): number {
     let c: string;
+    let hasDecimal = false;
     let s = "";
 
     for (;;) {
@@ -134,11 +135,12 @@ export class Parser {
       } else if (this.numerals === null && isDigit(c)) {
         s += c;
       } else if (decimal && c === this.decimal) {
-        if (s.includes(".")) {
+        if (hasDecimal) {
           this.unread(c);
           break;
         }
 
+        hasDecimal = true;
         s += ".";
       } else if (c === this.group || (isSpace(c) && isSpace(this.group))) {
         continue;
@@ -157,7 +159,7 @@ export class Parser {
 
     let c = this.read();
 
-    while (c !== "" && "+!".includes(c)) {
+    while (c === "+" || c === "!") {
       switch (c) {
         case "!":
           opts.space = false;
