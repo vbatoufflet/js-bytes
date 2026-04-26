@@ -16,7 +16,7 @@ jobs:
           node-version: "20"
       - name: Install and Build
         run: |
-          npm install --no-save
+          npm ci
           npm run docs
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4

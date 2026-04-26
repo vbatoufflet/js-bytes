@@ -19,5 +19,5 @@ jobs:
           node-version: "20"
       - name: Install and Test
         run: |
-          npm install --no-save
+          npm ci
           npm run test
