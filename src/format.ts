@@ -1,6 +1,49 @@
-import {FormatOpts, FormatUnit} from "@/types";
+import {binaryUnits, byteSuffix, decimalUnits, FormatUnit} from "./unit";
 
-import {binaryUnits, byteSuffix, decimalUnits} from "./unit";
+/** Formatting options */
+export interface FormatOpts<T = FormatUnit> {
+    /**
+     * Base to use for number formatting: `2` for binary mode (IEC) or `10` for decimal mode (SI).
+     */
+    base?: 2 | 10;
+
+    /**
+     * Decimal digits precision, with default to `2`.
+     */
+    digits?: number;
+
+    /**
+     * Format number according to a given locale. It uses the default locale if set to `true`, and
+     * support is disabled when omitted.
+     */
+    locale?: string | true;
+
+    /**
+     * Always print the sign associated with the numeric bytes value.
+     */
+    sign?: boolean;
+
+    /**
+     * Add a space between the value and its unit, with default to `true`.
+     */
+    space?: boolean;
+
+    /**
+     * Append the bytes suffix to the formatted string, with default to `true`.
+     */
+    suffix?: boolean;
+
+    /**
+     * Unit to format the bytes value to. It will automatically selects the one that best matches
+     * the current bytes value when omitted.
+     */
+    unit?: T;
+
+    /**
+     * Minimum width for the formatted string, padding with spaces if necessary.
+     */
+    width?: number;
+}
 
 export interface FormatSpec {
     text: string;

@@ -1,7 +1,6 @@
-import {FormatBinaryUnit, FormatDecimalUnit, FormatOpts, FormatUnit, ParseOpts} from "@/types";
-
-import {format, formatAs} from "./format";
-import {parseFormat, parseString} from "./parse";
+import {format, FormatOpts, formatAs} from "./format";
+import {parseFormat, ParseOpts, parseString} from "./parse";
+import {FormatBinaryUnit, FormatDecimalUnit, FormatUnit} from "./unit";
 
 export class Bytes {
     protected bytesObject: boolean;
@@ -86,3 +85,7 @@ export class Bytes {
         return new Bytes(negate ? this.value - v : this.value + v);
     }
 }
+
+export type {FormatOpts} from "./format";
+export type {ParseOpts} from "./parse";
+export type {FormatBinaryUnit, FormatDecimalUnit, FormatUnit} from "./unit";

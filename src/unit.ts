@@ -1,4 +1,23 @@
-import {FormatUnit} from "@/types";
+/** Formatting binary unit */
+export type FormatBinaryUnit =
+    | "bytes"
+    | "kibibytes"
+    | "mebibytes"
+    | "gibibytes"
+    | "tebibytes"
+    | "pebibytes";
+
+/** Formatting decimal unit */
+export type FormatDecimalUnit =
+    | "bytes"
+    | "kilobytes"
+    | "megabytes"
+    | "gigabytes"
+    | "terabytes"
+    | "petabytes";
+
+/** Formatting unit */
+export type FormatUnit = FormatBinaryUnit | FormatDecimalUnit;
 
 interface Unit {
     format: FormatUnit;

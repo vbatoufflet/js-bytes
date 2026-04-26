@@ -1,8 +1,15 @@
-import {FormatOpts, ParseOpts} from "@/types";
-
-import {FormatSpec} from "./format";
+import {FormatOpts, FormatSpec} from "./format";
 import {isDigit, isSpace} from "./string";
 import {binaryUnits, byteSuffix, decimalUnits} from "./unit";
+
+/** Parsing options */
+export interface ParseOpts {
+    /**
+     * Parse number according to a given locale. It uses the default locale if set to `true`, and
+     * support is disabled when omitted.
+     */
+    locale?: string | true;
+}
 
 const unitPrefixes = decimalUnits
     .map(a => a.prefix)
