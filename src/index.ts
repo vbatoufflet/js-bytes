@@ -33,7 +33,7 @@ export class Bytes {
   }
 
   public isValid(): boolean {
-    return !isNaN(this.value);
+    return !Number.isNaN(this.value);
   }
 
   public subtract(bytes: Bytes | number | string): Bytes {

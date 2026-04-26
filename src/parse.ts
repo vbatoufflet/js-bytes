@@ -80,7 +80,7 @@ export class Parser {
 
   public parseString(): number {
     const value = this.scanNumber();
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
       return NaN;
     }
 

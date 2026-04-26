@@ -61,7 +61,7 @@ const formatDefaults: FormatOpts = {
 };
 
 export function format(value: number, opts: FormatOpts): string {
-  if (isNaN(value)) {
+  if (Number.isNaN(value)) {
     return "Invalid Bytes";
   }
 
@@ -85,7 +85,7 @@ export function format(value: number, opts: FormatOpts): string {
 }
 
 export function formatAs(value: number, unit: FormatUnit): number {
-  if (!isNaN(value)) {
+  if (!Number.isNaN(value)) {
     if (unit === "bytes") {
       return Math.round(value);
     }
