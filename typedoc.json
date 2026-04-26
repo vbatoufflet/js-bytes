@@ -1,9 +1,6 @@
 {
-    "excludePrivate": true,
-    "excludeProtected": true,
-    "hideGenerator": true,
-    "includeVersion": true,
-    "markedOptions": {
-        "highlight": false
-    }
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "hideGenerator": true,
+  "includeVersion": true
 }
