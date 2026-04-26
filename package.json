@@ -25,6 +25,7 @@
     "main": "dist/bytes.js",
     "module": "dist/bytes.es.js",
     "types": "types/index.d.ts",
+    "sideEffects": false,
     "files": [
         "CHANGELOG.md",
         "dist/bytes.es.js",
