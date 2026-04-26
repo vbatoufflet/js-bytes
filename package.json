@@ -9,12 +9,19 @@
   "keywords": [
     "binary",
     "bytes",
+    "convert",
+    "converter",
     "decimal",
+    "filesize",
     "format",
+    "formatter",
+    "human-readable",
     "iec",
     "intl",
     "parse",
-    "si"
+    "parser",
+    "si",
+    "typescript"
   ],
   "repository": {
     "type": "git",
