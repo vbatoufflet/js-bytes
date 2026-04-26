@@ -42,7 +42,8 @@
         "docs": "typedoc types/index.d.ts",
         "lint": "eslint .",
         "release": "npm run --production build && npm publish",
-        "test": "ts-mocha --paths tests/*.test.ts"
+        "test": "ts-mocha --paths tests/*.test.ts",
+        "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
         "@batou.dev/eslint-config-typescript": "^0.3.0",

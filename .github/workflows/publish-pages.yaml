@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - v*
+permissions:
+  contents: write
 jobs:
   publish-pages:
     runs-on: ubuntu-latest
@@ -14,6 +16,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: "24"
+          cache: npm
       - name: Install and Build
         run: |
           npm ci
