@@ -1,7 +1,9 @@
 import commonjs from "@rollup/plugin-commonjs";
+import {createRequire} from "node:module";
 import esbuild from "rollup-plugin-esbuild";
 
-import pkg from "./package.json" assert {type: "json"};
+const require = createRequire(import.meta.url);
+const pkg = require("./package.json");
 
 export default {
     input: "src/index.ts",
