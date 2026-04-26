@@ -3,13 +3,10 @@ import { parseFormat, type ParseOpts, parseString } from "./parse.js";
 import { type FormatBinaryUnit, type FormatDecimalUnit, type FormatUnit } from "./unit.js";
 
 export class Bytes {
-  protected bytesObject: boolean;
-
   private value: number;
 
   private constructor(value: number) {
     this.value = value;
-    this.bytesObject = true;
   }
 
   public static fromBytes(value: number): Bytes {
@@ -18,10 +15,6 @@ export class Bytes {
 
   public static fromString(text: string, opts?: ParseOpts): Bytes {
     return new Bytes(parseString(text, opts));
-  }
-
-  public static isBytes(obj: unknown): obj is Bytes {
-    return Boolean((obj as Bytes)?.bytesObject);
   }
 
   public add(bytes: Bytes | number | string): Bytes {
@@ -72,7 +65,7 @@ export class Bytes {
       ? bytes
       : typeof bytes === "string"
         ? parseString(bytes)
-        : Bytes.isBytes(bytes)
+        : bytes instanceof Bytes
           ? bytes.value
           : NaN;
 
