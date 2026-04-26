@@ -100,7 +100,7 @@ export function formatAs(value: number, unit: FormatUnit): number {
 }
 
 function formatValue(value: number, unit: null | string, opts: FormatOpts): string {
-  const factor = opts.digits && opts.digits > 0 ? Math.pow(10, opts.digits) : 1;
+  const factor = opts.digits && opts.digits > 0 ? 10 ** opts.digits : 1;
   const v = Math.round(value * factor) / factor;
 
   let s = opts.locale ? v.toLocaleString(opts.locale !== true ? opts.locale : undefined) : v.toString();

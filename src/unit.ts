@@ -16,10 +16,10 @@ interface Unit {
 }
 
 export const binaryUnits: Unit[] = [
-  { format: "pebibytes", prefix: "Pi", value: Math.pow(1024, 5) },
-  { format: "tebibytes", prefix: "Ti", value: Math.pow(1024, 4) },
-  { format: "gibibytes", prefix: "Gi", value: Math.pow(1024, 3) },
-  { format: "mebibytes", prefix: "Mi", value: Math.pow(1024, 2) },
+  { format: "pebibytes", prefix: "Pi", value: 1024 ** 5 },
+  { format: "tebibytes", prefix: "Ti", value: 1024 ** 4 },
+  { format: "gibibytes", prefix: "Gi", value: 1024 ** 3 },
+  { format: "mebibytes", prefix: "Mi", value: 1024 ** 2 },
   { format: "kibibytes", prefix: "Ki", value: 1024 },
 ];
 
