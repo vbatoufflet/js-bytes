@@ -5,10 +5,15 @@ on:
     tags:
       - v*
 permissions:
-  contents: write
+  contents: read
+  id-token: write
+  pages: write
 jobs:
   publish-pages:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -20,13 +25,19 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: package.json
+      - name: Configure Pages
+        if: ${{ !env.ACT }}
+        uses: actions/configure-pages@v5
       - name: Install and Build
         run: |
           bun install --frozen-lockfile
           bun run docs
+      - name: Upload Pages Artifact
+        if: ${{ !env.ACT }}
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
       - name: Deploy
         if: ${{ !env.ACT }}
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: docs
+        id: deployment
+        uses: actions/deploy-pages@v4
