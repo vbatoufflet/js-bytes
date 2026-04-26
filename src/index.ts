@@ -68,18 +68,15 @@ export class Bytes {
   }
 
   private adaptValue(bytes: Bytes | number | string, negate: boolean): Bytes {
-    let v: number;
-    if (typeof bytes === "number") {
-      v = bytes;
-    } else if (typeof bytes === "string") {
-      v = parseString(bytes);
-    } else if (Bytes.isBytes(bytes)) {
-      v = bytes.value;
-    } else {
-      return new Bytes(NaN);
-    }
+    const value = typeof bytes === "number"
+      ? bytes
+      : typeof bytes === "string"
+        ? parseString(bytes)
+        : Bytes.isBytes(bytes)
+          ? bytes.value
+          : NaN;
 
-    return new Bytes(negate ? this.value - v : this.value + v);
+    return new Bytes(negate ? this.value - value : this.value + value);
   }
 }
 
