@@ -48,8 +48,8 @@ export interface FormatOpts<T = FormatUnit> {
 export interface FormatSpec {
   text: string;
   formats: {
-    index: number;
-    opts: FormatOpts;
+    readonly index: number;
+    readonly opts: FormatOpts;
   }[];
 }
 

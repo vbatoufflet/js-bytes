@@ -3,7 +3,7 @@ import { parseFormat, type ParseOpts, parseString } from "./parse.js";
 import { type FormatBinaryUnit, type FormatDecimalUnit, type FormatUnit } from "./unit.js";
 
 export class Bytes {
-  private value: number;
+  private readonly value: number;
 
   private constructor(value: number) {
     this.value = value;

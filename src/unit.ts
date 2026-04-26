@@ -10,12 +10,12 @@ export type FormatDecimalUnit = "bytes" | "kilobytes" | "megabytes" | "gigabytes
 export type FormatUnit = FormatBinaryUnit | FormatDecimalUnit;
 
 interface Unit {
-  format: FormatUnit;
-  prefix: string;
-  value: number;
+  readonly format: FormatUnit;
+  readonly prefix: string;
+  readonly value: number;
 }
 
-export const binaryUnits: Unit[] = [
+export const binaryUnits: readonly Unit[] = [
   { format: "pebibytes", prefix: "Pi", value: 1024 ** 5 },
   { format: "tebibytes", prefix: "Ti", value: 1024 ** 4 },
   { format: "gibibytes", prefix: "Gi", value: 1024 ** 3 },
@@ -23,7 +23,7 @@ export const binaryUnits: Unit[] = [
   { format: "kibibytes", prefix: "Ki", value: 1024 },
 ];
 
-export const decimalUnits: Unit[] = [
+export const decimalUnits: readonly Unit[] = [
   { format: "petabytes", prefix: "P", value: 1e15 },
   { format: "terabytes", prefix: "T", value: 1e12 },
   { format: "gigabytes", prefix: "G", value: 1e9 },
