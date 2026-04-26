@@ -48,6 +48,7 @@
     "build": "vite build && tsc --project tsconfig.build.json",
     "docs": "typedoc",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run",
     "test:package": "bun scripts/test-package.ts",
     "typecheck": "tsc --noEmit"
