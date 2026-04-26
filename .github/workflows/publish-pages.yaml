@@ -16,12 +16,16 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: "24"
-          cache: npm
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
       - name: Install and Build
         run: |
-          npm ci
-          npm run docs
+          bun install --frozen-lockfile
+          bun run docs
       - name: Deploy
+        if: ${{ !env.ACT }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
