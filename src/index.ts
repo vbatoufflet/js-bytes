@@ -44,12 +44,16 @@ export class Bytes {
   public toFormat(format: string, opts?: FormatOpts): string {
     const spec = parseFormat(format);
 
-    let out = spec.text;
-    spec.formats.reverse().forEach((fmt) => {
-      out = out.slice(0, fmt.index) + this.toString({ ...fmt.opts, ...opts }) + out.slice(fmt.index);
-    });
+    let out = "";
+    let offset = 0;
+    for (const fmt of spec.formats) {
+      const replacement = this.toString({ ...fmt.opts, ...opts });
 
-    return out;
+      out += spec.text.slice(offset, fmt.index) + replacement;
+      offset = fmt.index;
+    }
+
+    return out + spec.text.slice(offset);
   }
 
   public toString(opts?: FormatOpts): string {

@@ -39,11 +39,13 @@ export class Parser {
       this.group = parts.find(a => a.type === "group")?.value ?? "";
       this.minusSign = parts.find(a => a.type === "minusSign")?.value ?? "-";
 
-      this.numerals = new Map(
-        [...new Intl.NumberFormat(locale, { useGrouping: false }).format(9876543210)]
-          .reverse()
-          .map((value, index) => [value, index.toString()]),
-      );
+      this.numerals = new Map();
+
+      let index = 0;
+      for (const digit of new Intl.NumberFormat(locale, { useGrouping: false }).format(9876543210)) {
+        this.numerals.set(digit, (9 - index).toString());
+        index++;
+      }
     }
   }
 
