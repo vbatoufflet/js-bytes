@@ -24,11 +24,14 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
       - name: Install and Test
         run: |
-          npm ci
-          npm run lint
-          npm run typecheck
-          npm run build
-          npm run test
+          bun install --frozen-lockfile
+          bun run lint
+          bun run typecheck
+          bun run build
+          bun run test

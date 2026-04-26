@@ -2,6 +2,7 @@
   "name": "@batou.dev/bytes",
   "version": "0.5.1",
   "description": "Work with byte sizes in JavaScript with native Intl support",
+  "packageManager": "bun@1.3.12",
   "license": "MIT",
   "author": "Vincent Batoufflet <vincent@batou.dev>",
   "keywords": [
@@ -42,7 +43,7 @@
     "build": "rollup --config rollup.config.mjs",
     "docs": "typedoc types/index.d.ts",
     "lint": "eslint .",
-    "release": "npm run --production build && npm publish",
+    "release": "bun run build && npm publish",
     "test": "ts-mocha --paths tests/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
