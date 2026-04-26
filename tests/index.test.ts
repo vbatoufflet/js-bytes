@@ -1,8 +1,7 @@
 import { assert } from "chai";
 import { it } from "mocha";
 
-import { Bytes } from "@/src";
-import { type FormatOpts, type FormatUnit, type ParseOpts } from "@/types";
+import { Bytes, type FormatOpts, type FormatUnit, type ParseOpts } from "../src/index.js";
 
 const testData: {
   input: number | string;

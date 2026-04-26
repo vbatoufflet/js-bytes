@@ -1,6 +1,6 @@
-import { format, formatAs, type FormatOpts } from "./format";
-import { parseFormat, type ParseOpts, parseString } from "./parse";
-import { type FormatBinaryUnit, type FormatDecimalUnit, type FormatUnit } from "./unit";
+import { format, formatAs, type FormatOpts } from "./format.js";
+import { parseFormat, type ParseOpts, parseString } from "./parse.js";
+import { type FormatBinaryUnit, type FormatDecimalUnit, type FormatUnit } from "./unit.js";
 
 export class Bytes {
   protected bytesObject: boolean;
@@ -83,6 +83,6 @@ export class Bytes {
   }
 }
 
-export type { FormatOpts } from "./format";
-export type { ParseOpts } from "./parse";
-export type { FormatBinaryUnit, FormatDecimalUnit, FormatUnit } from "./unit";
+export type { FormatOpts } from "./format.js";
+export type { ParseOpts } from "./parse.js";
+export type { FormatBinaryUnit, FormatDecimalUnit, FormatUnit } from "./unit.js";

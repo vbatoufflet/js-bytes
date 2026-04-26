@@ -1,4 +1,4 @@
-import { binaryUnits, byteSuffix, decimalUnits, type FormatUnit } from "./unit";
+import { binaryUnits, byteSuffix, decimalUnits, type FormatUnit } from "./unit.js";
 
 /** Formatting options */
 export interface FormatOpts<T = FormatUnit> {

@@ -1,6 +1,6 @@
-import { type FormatOpts, type FormatSpec } from "./format";
-import { isDigit, isSpace } from "./string";
-import { binaryUnits, byteSuffix, decimalUnits } from "./unit";
+import { type FormatOpts, type FormatSpec } from "./format.js";
+import { isDigit, isSpace } from "./string.js";
+import { binaryUnits, byteSuffix, decimalUnits } from "./unit.js";
 
 /** Parsing options */
 export interface ParseOpts {
