@@ -1,6 +1,7 @@
 {
     "name": "@batou.dev/bytes",
     "version": "0.5.1",
+    "description": "Work with byte sizes in JavaScript with native Intl support",
     "author": "Vincent Batoufflet <vincent@batou.dev>",
     "license": "MIT",
     "keywords": [
@@ -13,13 +14,22 @@
         "parse",
         "si"
     ],
-    "repository": "https://github.com/vbatoufflet/js-bytes",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vbatoufflet/js-bytes.git"
+    },
+    "bugs": {
+        "url": "https://github.com/vbatoufflet/js-bytes/issues"
+    },
+    "homepage": "https://github.com/vbatoufflet/js-bytes#readme",
     "main": "dist/bytes.js",
     "module": "dist/bytes.es.js",
     "types": "types/index.d.ts",
     "files": [
+        "CHANGELOG.md",
         "dist/bytes.es.js",
         "dist/bytes.js",
+        "README.md",
         "src",
         "types",
         "LICENSE"
