@@ -29,6 +29,7 @@ jobs:
           bun run typecheck
           bun run build
           bun run test
+          bun run test:package
       - name: Pack
         run: npm pack --dry-run
       - name: Publish
