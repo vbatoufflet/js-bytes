@@ -32,3 +32,5 @@ export const decimalUnits: readonly Unit[] = [
 ];
 
 export const byteSuffix = "B";
+
+export const unitPrefixes = "PTGMK";

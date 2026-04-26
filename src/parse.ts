@@ -1,6 +1,6 @@
 import { type FormatOpts, type FormatSpec } from "./format.js";
 import { isDigit, isSpace } from "./string.js";
-import { binaryUnits, byteSuffix, decimalUnits } from "./unit.js";
+import { binaryUnits, byteSuffix, decimalUnits, unitPrefixes } from "./unit.js";
 
 /** Parsing options */
 export interface ParseOpts {
@@ -10,11 +10,6 @@ export interface ParseOpts {
    */
   locale?: string | true;
 }
-
-const unitPrefixes = decimalUnits
-  .map(a => a.prefix)
-  .join("")
-  .toUpperCase();
 
 export class Parser {
   private decimal = ".";
