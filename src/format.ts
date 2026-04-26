@@ -84,6 +84,8 @@ export function format(value: number, opts: FormatOpts): string {
   return formatValue(Math.round(value), null, opts);
 }
 
+const formatUnits = [...binaryUnits, ...decimalUnits];
+
 export function formatAs(value: number, unit: FormatUnit): number {
   if (Number.isNaN(value)) {
     return NaN;
@@ -93,7 +95,7 @@ export function formatAs(value: number, unit: FormatUnit): number {
     return Math.round(value);
   }
 
-  const entry = [...binaryUnits, ...decimalUnits].find(a => a.format === unit);
+  const entry = formatUnits.find(a => a.format === unit);
   return entry ? value / entry.value : NaN;
 }
 
