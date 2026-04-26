@@ -1,0 +1,36 @@
+---
+name: Publish Package
+on:
+  push:
+    tags:
+      - v*
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publish-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+      - name: Install and Test
+        run: |
+          bun install --frozen-lockfile
+          bun run lint
+          bun run typecheck
+          bun run build
+          bun run test
+      - name: Pack
+        run: npm pack --dry-run
+      - name: Publish
+        if: ${{ !env.ACT }}
+        run: npm publish --access public
