@@ -1,96 +1,102 @@
-# Bytes
+# @batou.dev/bytes
 
-Bytes is a JavaScript library for parsing, formatting, converting, and
-calculating byte sizes with native Intl support.
+Bytes is an all-in-one toolkit to parse, format, convert, and compute data sizes (kB, MB, GiB) in JavaScript and TypeScript.
 
-## Install
+It provides a consistent API to parse user input, convert between units and combine values, and produce localized output, with SI/IEC units and native `Intl` support.
 
-With Bun:
+Avoid juggling multiple utilities for parsing, formatting, and conversion.
 
-```sh
-bun add @batou.dev/bytes
-```
-
-With npm:
-
-```sh
-npm install @batou.dev/bytes
-```
-
-Bytes supports Node.js 22 and later, works with ES modules and CommonJS, and
-includes TypeScript declarations.
-
-ES modules:
+## Quick examples
 
 ```js
 import { Bytes } from "@batou.dev/bytes";
+
+Bytes.fromString("1.5 GB").valueOf();
+// 1500000000
+
+Bytes.fromBytes(1024).toString();
+// "1 KiB"
+
+Bytes.fromString("12.345 MiB").as("kilobytes");
+// 12944.67072
+
+Bytes.fromString("1 GB").add("500 MB").toString();
+// "1.5 GB"
+
+Bytes.fromString("1,234.56 GiB", { locale: "en" }).toDecimal({ locale: "fr" });
+// "1,33 TB"
 ```
 
-CommonJS:
+Explore the full API: <https://js-bytes.batou.dev/>
 
-```js
-const { Bytes } = require("@batou.dev/bytes");
+## Install
+
+```sh
+bun add @batou.dev/bytes
+# or
+npm install @batou.dev/bytes
 ```
+
+Requires Node.js 22 or later.
 
 ## Usage
 
-Format byte values:
+### Parse user input
 
 ```js
-Bytes.fromBytes(1024).toString(); // 1 KiB
-Bytes.fromString("1234.56kB").toFormat("%.3m"); // 1.235 MB
+Bytes.fromString("1.5 GB").valueOf();
+// 1500000000
 ```
 
-Parse localized values:
+### Format values for display
 
 ```js
-Bytes.fromString("1,234.56 GiB", { locale: "en" }).toDecimal({ locale: "fr" }); // 1,33 TB
+Bytes.fromBytes(1024).toString();
+// "1 KiB"
+
+Bytes.fromString("1234.56kB").toFormat("%.3m");
+// "1.235 MB"
 ```
 
-Convert to numeric values:
+### Convert between units
 
 ```js
-Bytes.fromString("1234.56 GiB").valueOf(); // 1325598706237
-Bytes.fromString("12.345 MiB").as("kilobytes"); // 12944.67072
+Bytes.fromString("12.345 MiB").as("kilobytes");
+// 12944.67072
 ```
 
-Calculate with byte sizes:
+### Combine sizes
 
 ```js
-Bytes.fromString("123.45 MB").add("1.23 MiB").toBinary(); // 118.96 MiB
+Bytes.fromString("1 GB").add("500 MB").toString();
+// "1.5 GB"
 ```
 
-## Development
+### Localize output
 
-This project uses Bun.
-
-```sh
-bun install
+```js
+Bytes.fromString("1,234.56 GiB", { locale: "en" }).toDecimal({ locale: "fr" });
+// "1,33 TB"
 ```
 
-Run the full verification suite with:
+## Comparison
 
-```sh
-bun run lint
-bun run typecheck
-bun run build
-bun run test
-bun run test:package
-```
+| Feature | `@batou.dev/bytes` | `bytes` | `filesize` |
+|---|---|---|---|
+| Parse | ✅ | ✅ | ❌ |
+| Format | ✅ | ✅ | ✅ |
+| Convert units | ✅ | ❌ | ❌ |
+| Arithmetic | ✅ | ❌ | ❌ |
+| i18n | ✅ | ❌ | ⚠️ |
 
-Generate documentation locally:
-
-```sh
-bun run docs
-```
+> ⚠️ _`filesize` supports localized formatting but does not use native `Intl` APIs or integrate i18n across parsing and conversion._
 
 ## Links
 
-- [Documentation](https://js-bytes.batou.dev/)
-- [Changelog](https://github.com/vbatoufflet/js-bytes/blob/main/CHANGELOG.md)
-- [npm package](https://www.npmjs.com/package/@batou.dev/bytes)
+* 📘 Documentation: [js-bytes.batou.dev](https://js-bytes.batou.dev/)
+* 📝 Changelog: [CHANGELOG.md](https://github.com/vbatoufflet/js-bytes/blob/main/CHANGELOG.md)
+* 📦 npm: [@batou.dev/bytes](https://www.npmjs.com/package/@batou.dev/bytes)
 
 ## License
 
-This code is licensed and distributed under the terms of the
-[MIT](https://opensource.org/licenses/MIT) license.
+MIT — see [LICENSE](https://github.com/vbatoufflet/js-bytes/blob/main/LICENSE) for details.
